@@ -42,7 +42,7 @@ Family Circle is a simple and accessible web app designed to make out-going call
 By clicking on a face / name of someone they know, a video call will begin, and the recipient will be notified to join. There is also voice command functionality to start a call for those with mobility restrictions.
 
 <div align="center">
-    <img style='border: 8px solid #FFFFFF' src="family-circle/src/assets/readme/home_screen.jpg" alt="Logo">
+    <img style='border: 8px solid #FFFFFF' src="family-circle/src/assets/readme/home_screen.png" alt="Logo">
 </div>
 
 The above image shows a sample of the home screen. The user can choose a call recipient from here.

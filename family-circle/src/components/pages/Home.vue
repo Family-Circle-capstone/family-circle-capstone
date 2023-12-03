@@ -45,11 +45,6 @@ const count = ref(0)
         </a>
       </div>
       <div class="w-[300px] h-[300px] relative">
-        <div class="w-[300px] h-[300px] left-0 top-0 absolute bg-white bg-opacity-0 rounded-[50px] shadow-inner border-4 border-darkblue"></div>
-        <div class="w-[308px] h-[308px] left-[-4px] top-[-4px] absolute bg-white bg-opacity-0 rounded-[54px] shadow-inner border-4 border-lightblue"></div>
-        <div class="w-[300px] h-[47px] left-0 top-[191px] absolute text-center text-lightblue text-[40px] font-normal font-['Arial']">Matthew Allen</div>
-        <div class="pt-2 w-[300px] h-[47px] left-0 top-[238px] absolute text-center text-darkblue text-3xl font-extralight font-['Arial']">Son</div>
-        <img class="object-cover w-[150px] h-[150px] left-[75px] top-[28px] absolute rounded-full" src="../../assets/profiles/matt.jpg" alt="profile-pic"/>
       </div>
     </div>
   </div>
