@@ -20,6 +20,21 @@ export default {
         '5px': '5px',
       }
     },
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'black': '#000000',
+      'white': '#ffffff',
+      'lightblue': '#3949ab',
+      'darkblue': '#1b365d',
+      'lightgreen': '#6aa84f',
+      'darkgreen': '#38761d',
+      'lightred': '#ff4747',
+      'darkred': '#ac2a2a',
+      'lightgrey': '#d9d9d9',
+      'darkgrey': '#969696',
+      'purple': '#9748ff',
+    },
   },
   plugins: [],
 }
