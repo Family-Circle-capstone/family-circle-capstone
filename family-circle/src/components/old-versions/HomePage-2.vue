@@ -36,7 +36,7 @@ const count = ref(0)
     </div>
   </div>
     <div class="justify-center items-center pt-8">
-      <img src="../../assets/gear.svg" class="mx-auto" alt="settings">
+      <img src="../../assets/home/gear.svg" class="mx-auto" alt="settings">
     </div>
   </div>
 </template>

@@ -1,9 +1,10 @@
 <script setup>
-import HelloWorld from './components/HomePage.vue'
+import Home from './components/pages/Home.vue'
+import Admin from './components/pages/Admin.vue'
 </script>
 
 <template>
-  <HelloWorld/>
+  <Admin />
 </template>
 
 <style scoped>
