@@ -1,9 +1,10 @@
 <a name="readme-top"></a>
 <!-- PROJECT LOGO -->
+<!--suppress HtmlDeprecatedAttribute -->
 <br />
 <div align="center">
-  <a href="https://github.com/b-duncs/holbertonschool-capstone">
-    <img style='border: 8px solid #FFFFFF' src="https://github.com/b-duncs/holbertonschool-capstone/blob/readme/images/Logo1.jpg" alt="Logo">
+  <a href="https://github.com/Family-Circle-capstone/family-circle-capstone">
+    <img src="family-circle/src/assets/readme/logo.png" alt="FamilyCircle Logo">
   </a>
 </div>
 <!-- TABLE OF CONTENTS -->
@@ -36,18 +37,18 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Family Circle is a simple and accessible web app designed to make out-going calls to preset contacts. The intended market for this application are individuals who may not be comfortable using other video call services and find themselves in an isolated environment. 
+Family Circle is a simple and accessible web app designed to make out-going calls to preset contacts. The intended market for this application are individuals who may not be comfortable using other video call services and find themselves in an isolated environment.
 
 By clicking on a face / name of someone they know, a video call will begin, and the recipient will be notified to join. There is also voice command functionality to start a call for those with mobility restrictions.
 
 <div align="center">
-    <img style='border: 8px solid #FFFFFF' src="https://github.com/b-duncs/holbertonschool-capstone/blob/readme/images/home_screen.jpg" alt="Logo">
+    <img style='border: 8px solid #FFFFFF' src="family-circle/src/assets/readme/home_screen.jpg" alt="Logo">
 </div>
 
 The above image shows a sample of the home screen. The user can choose a call recipient from here.
 
 <div align="center">
-    <img style='border: 8px solid #FFFFFF' src="https://github.com/b-duncs/holbertonschool-capstone/blob/readme/images/video_interface.jpg" alt="Logo">
+    <img style='border: 8px solid #FFFFFF' src="family-circle/src/assets/readme/video_interface.jpg" alt="Logo">
 </div>
 
 The above image shows the video call interface while a call is in progress.
@@ -56,12 +57,13 @@ The above image shows the video call interface while a call is in progress.
 `We need to add our final tech stack here`
 
 <div align=center>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original-wordmark.svg" title="HTML5" alt="HTML5" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML5" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/vuejs/vuejs-original.svg" title="Vue" alt="Vue" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-plain.svg" title="TailwindsCSS" alt="TailwindsCSS" height="40" width="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/b-duncs/holbertonschool-capstone/blob/readme/images/amplify_logo.png" title="Amplify" alt="Amplify" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/b-duncs/holbertonschool-capstone/blob/readme/images/twilio_logo.png" title="Twilio" alt="Twilio" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" title="Figma" alt="Figma" width="40" height="40"/>&nbsp;
+  <img src="family-circle/src/assets/readme/aws-svgrepo-com.svg" title="AWS" alt="AWS" width="40" height="40"/>&nbsp;
+  <img src="family-circle/src/assets/readme/twilio-svgrepo-com.svg" title="Twilio" alt="Twilio" width="40" height="40"/>&nbsp;
 </div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -90,13 +92,6 @@ The above image shows the video call interface while a call is in progress.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
-## Contributing
-
-`Probably remove this section`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- LICENSE -->
 ## License
 
@@ -109,7 +104,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Alex Leeper - [GitHub](https://github.com/alixvox?tab=repositories) - [LinkedIn](https://www.linkedin.com/in/jalexleeper/)
 
-Baylee Duncan - [GitHub](https://github.com/b-duncs) - [LinkedIn](https://www.linkedin.com/in/baylee-duncan/)
+Baylee Duncan - [GitHub](https://github.com/b-duncs) - [LinkedIn](https://www.linkedin.com/in/baylee-bowen/)
 
 Benjamin Sbanotto - [GitHub](https://github.com/bsbanotto) - [LinkedIn](https://www.linkedin.com/in/ben-sbanotto/)
 

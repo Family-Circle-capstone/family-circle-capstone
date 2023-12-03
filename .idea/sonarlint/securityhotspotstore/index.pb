@@ -1,0 +1,45 @@
+
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+b
+2family-circle/public/readme/twilio-svgrepo-com.svg,d/2/d288da0da6eb07492dd07deba559985c6b8acd08
+H
+family-circle/index.html,a/5/a5de19d073c62c182e438a64bbac2fd6f2b5cf5f
+U
+%family-circle/.vscode/extensions.json,2/d/2d8ecd9abc909271654269993d102424f1268383
+G
+family-circle/README.md,a/4/a49ae4dcf8bbed612d864be6119bf35c3bc58efd
+J
+family-circle/package.json,d/c/dc9f1f58f1b1136ea879a0964fe16428080cb634
+H
+family-circle/.gitignore,6/8/686fedafc5e1f5abb2bddc0aa09482f0f0c66065
+O
+family-circle/postcss.config.js,6/0/605bd1c63016ee296b2e263685e10af806a7feab
+P
+ family-circle/tailwind.config.js,b/0/b07245169e3d4a154b6673ba205e9a15ec0dd897
+L
+family-circle/vite.config.js,3/7/379c0e1abb54f1a5612e9ffbf05227fc720cb705
+I
+family-circle/src/App.vue,4/0/40876297db9fc3d1e8db426a90ebf2c864b0c379
+K
+family-circle/src/style.css,9/0/90b87f8936dd33c501ba9df57c8e84a777210e0a
+I
+family-circle/src/main.js,0/f/0f4d0b70759ccdc634fe931d916a773d24dc739a
+Q
+!family-circle/src/assets/gear.svg,d/5/d5697ce02c1d52b4f6ecaa8fdb84bea054c90486
+Q
+!family-circle/src/assets/logo.svg,0/4/04c1e90f52df29cde3d5bf8a9580e05840070fe8
+Y
+)family-circle/src/components/HomePage.vue,9/d/9dc69164674f2b584db539b0eb6ffecc80c7d00b
+d
+4family-circle/src/components/versions/HomePage-3.vue,a/1/a1f2b1b258be5a6348f30b9f6457bd6e7af09b14
+d
+4family-circle/src/components/versions/HomePage-2.vue,5/8/58d5b3093b750d9e919f945716178f085ade9ec8
+d
+4family-circle/src/components/versions/HomePage-1.vue,b/4/b452502bf501c1df5915e1a06a30496e37efe6e8
+M
+family-circle/public/vite.svg,4/c/4cbc507ba6552fb4627202497641505e8f68d4c9
+O
+family-circle/package-lock.json,b/6/b6030dd31952dc658005ebd3add9a786bdf6bf80
+_
+/family-circle/public/readme/aws-svgrepo-com.svg,0/1/01ab3bdb41cb5d7cc02962fdb3e74a186de03f4b
