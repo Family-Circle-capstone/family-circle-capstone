@@ -13,7 +13,7 @@ const count = ref(0)
     <div>
       <img src="../../assets/admin/logo.svg" alt="logo" class="mx-auto pb-8 w-[252.50px] h-[123px]">
     </div>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-8 pb-8">
       <div class="w-[368px] h-[157px] relative rounded-lg border border-black">
         <img class="ml-auto pr-5 h-[34px] top-[35px] relative" src="../../assets/admin/edit.svg" alt="save">
         <img class="ml-auto pr-5 h-[34px] top-[50px] relative" src="../../assets/admin/delete.svg" alt="delete">
@@ -46,7 +46,7 @@ const count = ref(0)
         <div class="w-[169px] h-[41px] left-[133px] top-[55px] pt-1 text-left absolute text-darkblue text-[25px] font-normal font-['Arial']">Add Contact</div>
       </div>
     </div>
-    <div class="grid grid-rows-3 gap-4 pt-10">
+    <div class="grid grid-rows-3 gap-4 pt-8">
       <div class="space-x-10">
         <button class="w-[210px] h-[51px] bg-darkgreen rounded-lg">
           <img class="object-contain h-15 w-15" src="../../assets/admin/save.svg" alt="save" />
