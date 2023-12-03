@@ -48,17 +48,17 @@ const count = ref(0)
     </div>
     <div class="grid grid-rows-3 gap-4 pt-8">
       <div class="space-x-10">
-        <button class="w-[210px] h-[51px] bg-darkgreen rounded-lg">
-          <img class="object-contain h-15 w-15" src="../../assets/admin/save.svg" alt="save" />
-          <span class="w-[120.24px] text-center font-bold font-['Arial']">Save Changes</span>
+        <button type="button" class="text-white bg-darkgreen hover:bg-lightgreen rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
+          <img class="pr-3 object-fill h-10 w-10" src="../../assets/admin/save.svg" alt="save" />
+          <span class="font-bold font-['Arial']">Save Changes</span>
         </button>
-        <button class="w-[210px] h-[51px] bg-lightblue rounded-lg">
-          <img class="object-contain h-15 w-15" src="../../assets/admin/key.svg" alt="pin" />
-          <span class="w-[120.24px] text-center font-bold font-['Arial']">Update PIN</span>
+        <button type="button" class="text-white bg-darkblue hover:bg-lightblue rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
+          <img class="pr-3 object-fill h-10 w-10" src="../../assets/admin/key.svg" alt="pin" />
+          <span class="font-bold font-['Arial']">Update PIN</span>
         </button>
-        <button class="w-[210px] h-[51px] bg-darkgrey rounded-lg">
-          <img class="object-contain h-15 w-15" src="../../assets/admin/cancel.svg" alt="cancel" />
-          <span class="w-[120.24px] text-center font-bold font-['Arial']">Cancel Changes</span>
+        <button type="button" class="text-white bg-darkgrey hover:bg-lightgrey rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
+          <img class="pr-3 object-fill h-10 w-10" src="../../assets/admin/cancel.svg" alt="cancel" />
+          <span class="font-bold font-['Arial']">Cancel Changes</span>
         </button>
       </div>
     </div>
