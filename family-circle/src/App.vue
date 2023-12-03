@@ -4,8 +4,6 @@ import Admin from './components/pages/Admin.vue'
 </script>
 
 <template>
-  <Home />
+  <Admin />
 </template>
 
-<style scoped>
-</style>
