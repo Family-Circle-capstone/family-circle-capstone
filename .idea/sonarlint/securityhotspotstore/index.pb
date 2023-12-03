@@ -81,3 +81,7 @@ S
 -.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
 A
 package-lock.json,f/a/fa288d1472d29beccb489a676f68739ad365fc47
+a
+1family-circle/src/components/pages/HomePage-4.vue,9/9/99847cb842272fbd3a2e91293599a7f37ea9303a
+h
+8family-circle/src/components/old-versions/HomePage-4.vue,3/3/33a703998f88dfab3eff6b88049d3b3043659ef8
