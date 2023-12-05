@@ -4,6 +4,8 @@ import Admin from './components/pages/Admin.vue'
 </script>
 
 <template>
-  <Home />
+  <router-view>
+  </router-view>
+  <!-- <Home /> -->
 </template>
 
