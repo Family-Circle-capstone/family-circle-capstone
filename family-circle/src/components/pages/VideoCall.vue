@@ -2,6 +2,7 @@
     import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
     import EndCallButton from '../EndCallButton.vue';
+    import VolumePanel from '../VolumePanel.vue';
 
     let storedContacts = ref([]);
     let relation = ref('');
@@ -21,7 +22,7 @@
 <template>
     <div class="grid grid-rows-4 grid-cols-2 gap-4 w-[40rem] h-screen">
         <button class="row-start-1 row-end-3 col-start-0 col-end-1 bg-lightblue">
-            Volume Buttons
+            <VolumePanel/>
         </button>
         <h1 class="row-start-1 row-end-2 col-start-1 col-end-3 bg-darkblue">
             You are speaking to your {{ relation }}, {{ name }}.
