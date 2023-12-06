@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node-dev server.js"
+    "start": "node-dev server.js",
+    "postbuild": "chmod +x ../bin/postbuild && ./../bin/postbuild.sh"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
