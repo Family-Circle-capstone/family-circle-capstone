@@ -10,6 +10,7 @@ mkdir -p ./.amplify-hosting/compute/default
 # Copy the built Vue application and server files
 cp -r ./family-circle/dist ./.amplify-hosting/compute/default/dist
 cp ./family-circle/server.js ./.amplify-hosting/compute/default/server.js
+cp ./family-circle/package.json ./.amplify-hosting/compute/default/package.json
 cp -r ./family-circle/node_modules ./.amplify-hosting/compute/default/node_modules
 
 # Copy static assets
