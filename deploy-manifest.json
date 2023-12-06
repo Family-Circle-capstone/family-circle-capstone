@@ -44,7 +44,7 @@
     {
       "name": "default",
       "runtime": "nodejs18.x",
-      "entrypoint": ".amplify-hosting/compute/default/server.js"
+      "entrypoint": "default/server.js"
     }
   ]
 }
