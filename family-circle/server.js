@@ -65,10 +65,10 @@ app.post("/join-room", async (req, res) => {
   res.send({ token: token });
 });
 
-app.use(express.static("public"));
+app.use(express.static("dist"));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Start the Express server
