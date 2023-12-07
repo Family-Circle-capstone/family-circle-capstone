@@ -11,18 +11,15 @@ const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
 const port = process.env.PORT || 5000;
-const TWILIO_API_KEY_SID = 'SK5b1f9c0bc72d8ca396e883c0ead27c2c';
-const TWILIO_API_KEY_SECRET = '5OcZ9W0uTIXLKJOR0NLmcT3CcpaywnYP';
-const TWILIO_ACCOUNT_SID = 'ACb232873093e96221f9d21c6fedb5b08e';
 
 // Use the Express JSON middleware
 app.use(express.json());
 
 // Create the Twilio client
 const twilioClient = twilio(
-  TWILIO_API_KEY_SID,
-  TWILIO_API_KEY_SECRET,
-  { accountSid: TWILIO_ACCOUNT_SID }
+  process.env.TWILIO_API_KEY_SID,
+  process.env.TWILIO_API_KEY_SECRET,
+  { accountSid: process.env.TWILIO_ACCOUNT_SID }
 );
 
 // Function to find or create a room
@@ -44,9 +41,9 @@ const findOrCreateRoom = async (roomName) => {
 // Function to generate an Access Token
 const getAccessToken = (roomName) => {
   const token = new AccessToken(
-    TWILIO_ACCOUNT_SID,
-    TWILIO_API_KEY_SID,
-    TWILIO_API_KEY_SECRET,
+    process.env.TWILIO_ACCOUNT_SID,
+    process.env.TWILIO_API_KEY_SID,
+    process.env.TWILIO_API_KEY_SECRET,
     { identity: uuidv4() }
   );
   const videoGrant = new VideoGrant({ room: roomName });
