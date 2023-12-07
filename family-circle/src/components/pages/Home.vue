@@ -7,10 +7,10 @@
     <!-- contacts container -->
     <div class="grid grid-cols-3 place-items-center max-h-screen">
       <!-- contact one button -->
-      <contact-card :index="0" name="Ben Sbanotto" relation="grandson" img_src="../../assets/profiles/ben.jpg"/>
+      <contact-card :index="0" name="Ben Sbanotto" relation="grandson" img_src="/src/assets/profiles/ben.jpg"/>
       <div><!--grid spacing--></div>
       <!-- contact two button -->
-      <contact-card :index="1" class="" name="Baylee Bowen" relation="daughter" img_src="../../assets/profiles/baylee.jpg"/>
+      <contact-card :index="1" class="" name="Baylee Bowen" relation="daughter" img_src="/src/assets/profiles/baylee.jpg"/>
 
       <div><!--grid spacing--></div>
       <!-- logo -->
@@ -19,7 +19,7 @@
       </div>
       <div><!--grid spacing--></div>
       <!-- contact three button -->
-      <contact-card :index="2" name="Alex Leeper" relation="nephew" img_src="../../assets/profiles/alex.jpg"/>
+      <contact-card :index="2" name="Alex Leeper" relation="nephew" img_src="/src/assets/profiles/alex.jpg"/>
 
       <!-- admin button -->
       <div class="pt-8 flex items-end justify-center">
