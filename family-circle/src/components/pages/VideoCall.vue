@@ -20,7 +20,7 @@
 </script>
 
 <template>
-    <div class="grid grid-rows-4 grid-cols-2 gap-4 w-[40rem] h-screen">
+    <div class="grid grid-rows-4 grid-cols-2 gap-4 w-[80rem] h-screen">
         <button class="row-start-1 row-end-3 col-start-0 col-end-1 bg-lightblue">
             <VolumePanel/>
         </button>
