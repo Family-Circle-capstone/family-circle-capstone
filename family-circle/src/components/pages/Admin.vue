@@ -87,7 +87,7 @@ import CancelButton from '../CancelButton.vue'
     <div class="grid grid-rows-3 gap-4 pt-8">
       <div class="space-x-10">
         <!-- save button -->
-        <button type="button" class="text-white bg-darkgreen hover:bg-lightgreen rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
+        <button type="submit" class="text-white bg-darkgreen hover:bg-lightgreen rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
           <SaveButton/>
         </button>
         <!-- update pin button -->
@@ -95,7 +95,7 @@ import CancelButton from '../CancelButton.vue'
           <ChangePinButton/>
         </button>
         <!-- cancel button -->
-        <button type="button" class="text-white bg-darkgrey hover:bg-lightgrey rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center">
+        <button type="button">
           <CancelButton/>
         </button>
       </div>
