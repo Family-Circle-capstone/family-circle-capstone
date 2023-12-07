@@ -64,11 +64,11 @@ app.post("/join-room", async (req, res) => {
 
 // Serve Vue app in production
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '/')));
 
 // All other routes should redirect to the Vue app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '/', 'index.html'));
 });
 
 // Start the Express server
