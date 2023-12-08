@@ -104,7 +104,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Alex Leeper - [GitHub](https://github.com/alixvox?tab=repositories) - [LinkedIn](https://www.linkedin.com/in/jalexleeper/)
 
-Baylee Duncan - [GitHub](https://github.com/b-duncs) - [LinkedIn](https://www.linkedin.com/in/baylee-bowen/)
+Baylee Bowen - [GitHub](https://github.com/b-duncs) - [LinkedIn](https://www.linkedin.com/in/baylee-bowen/)
 
 Benjamin Sbanotto - [GitHub](https://github.com/bsbanotto) - [LinkedIn](https://www.linkedin.com/in/ben-sbanotto/)
 
