@@ -1,10 +1,10 @@
 <script setup>
-import EditContactButton from '../EditContactButton.vue'
-import DeleteContactButton from '../DeleteContactButton.vue'
-import AddContactButton from '../AddContactButton.vue'
-import SaveButton from '../SaveButton.vue'
-import ChangePinButton from '../UpdatePinButton.vue'
-import CancelButton from '../CancelButton.vue'
+import EditContactButton from '../buttons/admin/EditContact.vue'
+import DeleteContactButton from '../buttons/admin/DeleteContact.vue'
+import AddContactButton from '../buttons/admin/AddContact.vue'
+import SaveButton from '../buttons/admin/Save.vue'
+import ChangePinButton from '../buttons/admin/UpdatePin.vue'
+import CancelButton from '../buttons/admin/Cancel.vue'
 </script>
 
 <template>

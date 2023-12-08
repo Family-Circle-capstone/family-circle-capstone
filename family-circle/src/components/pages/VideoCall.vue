@@ -1,8 +1,8 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
-    import EndCallButton from '../EndCallButton.vue';
-    import VolumePanel from '../VolumePanel.vue';
+    import EndCallButton from '../buttons/video_call/EndCall.vue';
+    import VolumePanel from '../buttons/video_call/VolumePanel.vue';
 
     let storedContacts = ref([]);
     let relation = ref('');
