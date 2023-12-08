@@ -23,12 +23,9 @@
 
       <!-- admin button -->
       <div class="pt-8 flex items-end justify-center">
-        <!-- <a href="Admin.vue" class="mx-auto"> -->
           <router-link to="/admin">
             <img src="../../assets/home/gear.svg" alt="settings">
           </router-link>
-          
-        <!-- </a> -->
       </div>
       <!-- contact four button -->
       <div class="w-[300px] h-[300px] relative">
