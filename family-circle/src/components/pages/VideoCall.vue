@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, markRaw } from 'vue';
 import { useRoute } from 'vue-router';
 import TwilioVideo from 'twilio-video';
 import EndCallButton from '../buttons/video_call/EndCall.vue';
@@ -28,13 +28,16 @@ async function fetchAccessToken(roomName) {
 
 async function connectToRoom(token) {
     try {
-        room = await TwilioVideo.connect(token, {
+        let connectedRoom = await TwilioVideo.connect(token, {
             room: roomName,
         });
+        connectedRoom = markRaw(connectedRoom);
+        room.value = connectedRoom;
+        console.log(`Connected to room: ${room.value.name}, as ${room.value.localParticipant.identity}`);
         setupRoomEventListeners();
         if (room.value) {
-            handleConnectedParticipant(room.localParticipant);
-            room.participants.forEach(handleConnectedParticipant);
+            handleConnectedParticipant(room.value.localParticipant);
+            room.value.participants.forEach(handleConnectedParticipant);
         }
     } catch (error) {
         console.error('Failed to connect to Twilio Room:', error);
@@ -42,35 +45,50 @@ async function connectToRoom(token) {
 }
 
 function setupRoomEventListeners() {
-    if (room) {
-        room.on("participantConnected", handleConnectedParticipant);
-        room.on("participantDisconnected", handleDisconnectedParticipant);
-        window.addEventListener("pagehide", () => room.disconnect());
-        window.addEventListener("beforeunload", () => room.disconnect());
+    if (room.value) {
+        room.value.on("participantConnected", handleConnectedParticipant);
+        room.value.on("participantDisconnected", handleDisconnectedParticipant);
+        window.addEventListener("pagehide", () => room.value.disconnect());
+        window.addEventListener("beforeunload", () => room.value.disconnect());
     }
 }
 
 function handleConnectedParticipant(participant) {
+    console.log(`Participant connected: ${participant.identity}`);
     if (participant) {
         participant.tracks.forEach((trackPublication) => {
+            console.log(`Published track for ${participant.identity}:`, trackPublication);
             if (trackPublication.track) {
+                console.log(`Displaying track for ${participant.identity}`);
                 displayTrack(trackPublication.track, participant)
+            } else {
+                trackPublication.on('subscribed', (track) => {
+                    displayTrack(track, participant)
+                });
             }
         });
         participant.on("trackPublished", (trackPublication) => {
-            if (trackPublication.track) {
-                displayTrack(trackPublication.track, participant)
-            }
+            console.log(`New track published by ${participant.identity}:`, trackPublication);
+            trackPublication.on('subscribed', (track) => {
+                console.log(`Displaying new track for ${participant.identity}`);
+                displayTrack(track, participant);
+            })
         });
+        console.log(`Participant connected: ${participant.identity}`);
     }
 }
 
 function displayTrack(track, participant) {
+    console.log(`Attempting to display ${track.kind} track for ${participant.identity}:`);
     if (track.kind === "video") {
         const videoElement = track.attach();
-        if (participant === room.localParticipant) {
+        console.log(`Video element for ${participant.identity}:`, videoElement);
+
+        if (participant.identity === room.value.localParticipant.identity) {
+            console.log('Appending to local video ref:', localVideoRef.value);
             localVideoRef.value.appendChild(videoElement);
         } else {
+            console.log('Appending to remote video ref:', remoteVideoRef.value);
             remoteVideoRef.value.appendChild(videoElement);
         }
     }
@@ -85,6 +103,7 @@ function handleDisconnectedParticipant(participant) {
 }
 
 onMounted(() => {
+    console.log(localVideoRef.value, remoteVideoRef.value);
     const initializeRoom = async () => {
         storedContacts.value = JSON.parse(localStorage.getItem('contacts')) || [];
         if (storedContacts.value.length > roomName) {
@@ -98,8 +117,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    if (room) {
-        room.disconnect();
+    if (room.value) {
+        room.value.disconnect();
     }
 });
 
