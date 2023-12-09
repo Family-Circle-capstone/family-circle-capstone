@@ -6,5 +6,3 @@
     </div>
   </router-link>
 </template>
-<script setup>
-</script>
