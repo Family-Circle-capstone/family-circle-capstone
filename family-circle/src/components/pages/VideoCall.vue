@@ -8,6 +8,7 @@ import VolumePanel from '../buttons/video_call/VolumePanel.vue';
 let storedContacts = ref([]);
 let relation = ref('');
 let name = ref('');
+let cell = ref('');
 const localVideoRef = ref(null);
 const remoteVideoRef = ref(null);
 const route = useRoute();
@@ -103,12 +104,12 @@ function handleDisconnectedParticipant(participant) {
 }
 
 onMounted(() => {
-    console.log(localVideoRef.value, remoteVideoRef.value);
     const initializeRoom = async () => {
         storedContacts.value = JSON.parse(localStorage.getItem('contacts')) || [];
         if (storedContacts.value.length > roomName) {
             relation.value = storedContacts.value[roomName].relation;
             name.value = storedContacts.value[roomName].name;
+            cell.value = storedContacts.value[roomName].cell;
         }
         const token = await fetchAccessToken(roomName);
         await connectToRoom(token);
