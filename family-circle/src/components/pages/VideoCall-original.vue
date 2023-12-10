@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, markRaw } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import TwilioVideo from 'twilio-video';
 import EndCallButton from '../buttons/video_call/EndCall.vue';
 import VolumePanel from '../buttons/video_call/VolumePanel.vue';
@@ -12,49 +12,8 @@ let email = ref('');
 const localVideoRef = ref(null);
 const remoteVideoRef = ref(null);
 const route = useRoute();
-const router = useRouter();
 const roomName = route.params.contactIndex;
 let room = ref(null);
-
-// Import speech recognition related functionality
-import { watch, ref as refSpeech, onMounted as onMountedSpeech, onUnmounted as onUnmountedSpeech } from 'vue';
-const voiceCommand = refSpeech('');
-
-onMountedSpeech(() => {
-// Add event listener for the 'voiceCommand' event
-document.addEventListener('voiceCommand', handleVoiceCommand);
-});
-
-onUnmountedSpeech(() => {
-// Remove event listener when the component is unmounted
-document.removeEventListener('voiceCommand', handleVoiceCommand);
-});
-
-// Function to handle the voice command for ending the call
-const handleVoiceCommand = (event) => {
-const command = event.detail.toLowerCase();
-console.log('Heard command:', command);
-
-// Check if the command is "end circle call"
-if (command === 'circle end call') {
-    // Simulate a click on the EndCallButton
-    handleEndCallButtonClick();
-}
-};
-
-// Function to simulate the click on the EndCallButton
-const handleEndCallButtonClick = () => {
-// Log for debugging
-console.log('End Call Button Clicked!');
-// Perform actions you want to do when the call ends
-  // Disconnect from the Twilio room
-  if (room.value) {
-    room.value.disconnect();
-  }
-
-  // Navigate back to the home route
-  router.push('/');
-};
 
 onMounted(() => {
   const initializeRoom = async () => {
@@ -170,49 +129,26 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="mx-auto">
-    <div class="grid grid-cols-2">
-      <div class="flex flex-col space-y-6">
-        <!-- Video Text -->
-        <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
-          <span class="text-black">
-            You’re speaking to your
-          </span>
-          <span class="text-darkgreen font-bold">
-            {{ relation }}
-          </span>
-          <span class="text-black">, </span>
-          <span class="text-darkblue font-bold">
-            {{ name }}
-          </span>
-          <span class="text-black">.</span>
-        </div>
-        <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
-          <!-- remote video will be attached here -->
-        </div>
-      </div>
-      <div class="flex flex-col space-y-16">
-        <!-- Local Video Screen -->
-        <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
-          <!-- local video will be attached here -->
-        </div>
-        <!-- Video Control Buttons -->
-        <div class="mx-auto space-y-36">
-          <!-- Volume Panel Buttons -->
-          <div class>
-            <button>
-              <VolumePanel/>
-            </button>
-          </div>
-          <!-- End Call Button -->
-          <div>
-            <button>
-              <EndCallButton/>
-            </button>
-          </div>
-        </div>
-      </div>
+  <div class="grid grid-rows-3 grid-cols-3 gap-4 w-[40rem] h-screen">
+    <!-- Text Section -->
+    <h1 class="row-start-1 row-end-2 col-start-1 col-end-3 bg-darkblue">
+      You are speaking to your {{ relation }}, {{ name }}.
+    </h1>
+    <!-- Local User's Camera -->
+    <div ref="localVideoRef" class="row-start-1 row-end-2 col-start-3 col-end-4 bg-lightgrey">
+      <!-- Local video will be attached here -->
     </div>
+    <!-- Remote User's Camera -->
+    <div ref="remoteVideoRef" class="row-start-2 row-end-4 col-start-1 col-end-3 bg-darkgrey">
+      <!-- Remote video will be attached here -->
+    </div>
+    <!-- Volume Buttons -->
+    <button class="row-start-2 row-end-3 col-start-3 col-end-4 bg-lightblue">
+      <VolumePanel/>
+    </button>
+    <!-- End Call Button -->
+    <button class="row-start-3 row-end-4 col-start-3 col-end-4 bg-darkred">
+      <EndCallButton/>
+    </button>
   </div>
 </template>

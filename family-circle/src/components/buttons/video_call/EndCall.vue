@@ -1,8 +1,9 @@
 <template>
-    <router-link to="/" class="end-call-button">
-        <img src="../../../assets/video_call/phone.svg" alt="end call button">
-    </router-link>
+  <router-link to="/" class="end-call-button">
+    <div class="mx-auto">
+      <div class="flex justify-center w-[117px] h-[138px] bg-lightred border border-black">
+        <img class="object-fill w-[67px] h-[138px]" src="../../../assets/video_call/phone.svg" alt="end call button">
+      </div>
+    </div>
+  </router-link>
 </template>
-
-<script>
-</script>
