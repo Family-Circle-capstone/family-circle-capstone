@@ -17,7 +17,7 @@
 
   const handleVoiceCommand = (event) => {
     voiceCommand.value = event.detail;
-    
+
     console.log('Heard command:', voiceCommand.value);
 
     // Check if the command starts with "circle call"
@@ -27,10 +27,26 @@
 
       console.log('Contact name input:', contactNameInput);
 
-      // Find the contact in the contacts array by checking both first and full names
-      const contactIndex = contacts.findIndex(
-        c => c.name.toLowerCase().includes(contactNameInput)
-      );
+      // Split the input into first and last names
+      const [inputFirstName, inputLastName] = contactNameInput.split(' ');
+
+      // Find the contact in the contacts array with priority to full name, then first name, then last name
+      const contactIndex = contacts.findIndex((c) => {
+        const lowercasedFullName = c.name.toLowerCase();
+        const [contactFirstName, contactLastName] = c.name.split(' ').map(name => name.toLowerCase());
+
+        console.group(`Testing contact: ${c.name}`);
+        console.log(`Input vs. Full name: ${contactNameInput} vs. ${lowercasedFullName}:`, lowercasedFullName === contactNameInput);
+        console.log(`Input first name vs. Contact first name: ${inputFirstName} vs. ${contactFirstName}:`, contactFirstName.includes(inputFirstName));
+        console.log(`Input last name vs. Contact last name: ${inputLastName} vs. ${contactLastName}:`, contactLastName.includes(inputLastName));
+        console.groupEnd();
+
+        return (
+          lowercasedFullName === contactNameInput ||
+          contactFirstName.includes(inputFirstName) ||
+          contactLastName.includes(inputLastName)
+        );
+      });
 
       // If the contact is found, log the index and navigate to the video call route
       if (contactIndex !== -1) {
