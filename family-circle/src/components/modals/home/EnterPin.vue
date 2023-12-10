@@ -15,12 +15,12 @@ onClickOutside(modal, () => (isModalOpen.value = false));
   <Teleport to="#modal">
     <div class="modal-bg" v-if="isModalOpen">
       <div class="modal text-black">
-        <button @click="isModalOpen = false" class="close-btn text-black">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <button @click="isModalOpen = false" class="close-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-darkgrey">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-lg text-center text-darkblue font-['Arial']">Administrator PIN</div>
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Administrator PIN</div>
         <form class="p-2">
           <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
           <div class="p-2 flex items-center justify-between">
