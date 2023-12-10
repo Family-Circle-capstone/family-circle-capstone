@@ -77,18 +77,31 @@ The above image shows the video call interface while a call is in progress.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Voice Commands
+On the home screen, use the words "circle call + <name>" to start a new call. For example, if John Smith is one of the defined contacts, say "Circle call John" or "Circle call John Smith". You can even say "Circle call Mr. Smith" to get connected.
+
+Names, however, are unique. There are limitations with unique spellings of names, or uncommon names. They are likely to be misinterpreted by the speech recognition library.
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Task 1
-- [ ] Task 2
-- [ ] Task 3
-- [ ] Task 4
-- [ ] Task with Subtasks
-    - [ ] Subtask 1
-    - [ ] Subtask 2
+- [x] Sprint 1 - November 27 - December 3
+    - [x] - Identify the problem
+    - [x] - Assign Scrum team roles
+    - [x] - Solution brainstorming
+    - [x] - Mock up of App design
+    - [x] - Determine Tech stack
+- [x] Sprint 2 - December 4 - December 10
+    - [ ] - Build Web App
+      - [x] - Create App Home Screen
+      - [x] - Integrate Video Calling Cababilities
+      - [ ] - Integrate Admin Operations
+      - [x] - Integrate Voice Commands
+- [ ] Sprint 3 - December 11 - December 15
+    - [ ] - Connecting loose ends
+- [ ] Sprint 4 - December 16 - December 21
+    - [ ] - Project Retrospective
+    - [ ] - Celebrate :tada:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
