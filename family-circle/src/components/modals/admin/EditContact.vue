@@ -21,8 +21,11 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Edit User</div>
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Edit Contact</div>
         <form class="p-2 ">
+          <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
+            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue"></div>
+          </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Name
