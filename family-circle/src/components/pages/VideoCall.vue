@@ -36,7 +36,7 @@ const command = event.detail.toLowerCase();
 console.log('Heard command:', command);
 
 // Check if the command is "end circle call"
-if (command === 'end circle call') {
+if (command === 'circle end call') {
     // Simulate a click on the EndCallButton
     handleEndCallButtonClick();
 }
