@@ -8,7 +8,7 @@ import VolumePanel from '../buttons/video_call/VolumePanel.vue';
 let storedContacts = ref([]);
 let relation = ref('');
 let name = ref('');
-let cell = ref('');
+let email = ref('');
 const localVideoRef = ref(null);
 const remoteVideoRef = ref(null);
 const route = useRoute();
@@ -21,21 +21,21 @@ onMounted(() => {
         if (storedContacts.value.length > roomName) {
             relation.value = storedContacts.value[roomName].relation;
             name.value = storedContacts.value[roomName].name;
-            cell.value = storedContacts.value[roomName].cell;
+            email.value = storedContacts.value[roomName].email;
         }
-        const token = await fetchAccessToken(roomName);
+        const token = await fetchAccessToken(roomName, email.value);
         await connectToRoom(token);
     };
     initializeRoom();
 });
 
-async function fetchAccessToken(roomName) {
+async function fetchAccessToken(roomName, email) {
     const response = await fetch('/join-room', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ roomName }),
+        body: JSON.stringify({ roomName, email }),
     });
     const { token } = await response.json();
     return token;
