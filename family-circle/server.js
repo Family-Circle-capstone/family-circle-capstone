@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
-const port = PORT || 5000;
+const port = process.env.PORT || 5000;
 
 const ssmClient = new SSMClient({ region: "us-east-2" });
 
