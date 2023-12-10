@@ -153,14 +153,17 @@ onUnmounted(() => {
     <div class="flex flex-col space-y-16">
       <!-- Local Video Screen -->
       <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
-
+        <!-- local video will be attached here -->
       </div>
+      <!-- Video Control Buttons -->
       <div class="mx-auto space-y-36">
+        <!-- Volume Panel Buttons -->
         <div class>
           <button>
             <VolumePanel/>
           </button>
         </div>
+        <!-- End Call Button -->
         <div>
           <button>
             <EndCallButton/>
