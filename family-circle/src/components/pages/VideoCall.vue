@@ -129,45 +129,47 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2">
-    <div class="flex flex-col space-y-6">
-      <!-- Video Text -->
-      <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
-      <span class="text-black">
-        You’re speaking to your
-      </span>
-        <span class="text-darkgreen font-bold">
-        {{ relation }}
-      </span>
-        <span class="text-black">, </span>
-        <span class="text-darkblue font-bold">
-        {{ name }}
-      </span>
-        <span class="text-black">.</span>
-      </div>
-      <!-- Remote Video Screen -->
-      <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
-        <!-- remote video will be attached here -->
-      </div>
-    </div>
-    <div class="flex flex-col space-y-16">
-      <!-- Local Video Screen -->
-      <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
-        <!-- local video will be attached here -->
-      </div>
-      <!-- Video Control Buttons -->
-      <div class="mx-auto space-y-36">
-        <!-- Volume Panel Buttons -->
-        <div class>
-          <button>
-            <VolumePanel/>
-          </button>
+  <div class="mx-auto">
+    <div class="grid grid-cols-2">
+      <div class="flex flex-col space-y-6">
+        <!-- Video Text -->
+        <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
+          <span class="text-black">
+            You’re speaking to your
+          </span>
+          <span class="text-darkgreen font-bold">
+            {{ relation }}
+          </span>
+          <span class="text-black">, </span>
+          <span class="text-darkblue font-bold">
+            {{ name }}
+          </span>
+          <span class="text-black">.</span>
         </div>
-        <!-- End Call Button -->
-        <div>
-          <button>
-            <EndCallButton/>
-          </button>
+        <!-- Remote Video Screen -->
+        <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
+          <!-- remote video will be attached here -->
+        </div>
+      </div>
+      <div class="flex flex-col space-y-16">
+        <!-- Local Video Screen -->
+        <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
+          <!-- local video will be attached here -->
+        </div>
+        <!-- Video Control Buttons -->
+        <div class="mx-auto space-y-36">
+          <!-- Volume Panel Buttons -->
+          <div class>
+            <button>
+              <VolumePanel/>
+            </button>
+          </div>
+          <!-- End Call Button -->
+          <div>
+            <button>
+              <EndCallButton/>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
 <script>
-import DeleteContactButton from "../../buttons/admin/DeleteContact.vue";
+import DeleteContactModal from "../../modals/admin/DeleteContact.vue";
 import EditContactModal from "../../modals/admin/EditContact.vue";
 
 export default {
-  components: {EditContactModal, DeleteContactButton},
+  components: {EditContactModal, DeleteContactModal},
   props: ['index'],
   data() {
     return {
@@ -25,9 +25,7 @@ export default {
         <!-- edit button -->
         <EditContactModal/>
         <!-- delete button -->
-        <button type="button" class="absolute bottom-6 right-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
-          <DeleteContactButton/>
-        </button>
+        <DeleteContactModal/>
       </div>
       <!-- contact one info -->
       <img class="object-cover w-[95px] h-[98px] left-[26px] top-[30px] absolute border border-lightblue" :src="contact.img_src" alt="profile-pic"/>

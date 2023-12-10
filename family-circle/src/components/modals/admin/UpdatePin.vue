@@ -21,7 +21,7 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Change PIN</div>
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Update PIN</div>
         <form class="p-2 ">
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
@@ -48,8 +48,8 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="button">
-              Change PIN
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
+              Update
             </button>
             <!-- <a class="p-2 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
               Forgot Password?
