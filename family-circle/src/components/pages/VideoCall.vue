@@ -15,6 +15,20 @@ const route = useRoute();
 const roomName = route.params.contactIndex;
 let room = ref(null);
 
+onMounted(() => {
+    const initializeRoom = async () => {
+        storedContacts.value = JSON.parse(localStorage.getItem('contacts')) || [];
+        if (storedContacts.value.length > roomName) {
+            relation.value = storedContacts.value[roomName].relation;
+            name.value = storedContacts.value[roomName].name;
+            cell.value = storedContacts.value[roomName].cell;
+        }
+        const token = await fetchAccessToken(roomName);
+        await connectToRoom(token);
+    };
+    initializeRoom();
+});
+
 async function fetchAccessToken(roomName) {
     const response = await fetch('/join-room', {
         method: 'POST',
@@ -34,9 +48,9 @@ async function connectToRoom(token) {
         });
         connectedRoom = markRaw(connectedRoom);
         room.value = connectedRoom;
-        console.log(`Connected to room: ${room.value.name}, as ${room.value.localParticipant.identity}`);
         setupRoomEventListeners();
         if (room.value) {
+            console.log(`Connected to room: ${room.value.name}, as ${room.value.localParticipant.identity}`);
             handleConnectedParticipant(room.value.localParticipant);
             room.value.participants.forEach(handleConnectedParticipant);
         }
@@ -81,17 +95,20 @@ function handleConnectedParticipant(participant) {
 
 function displayTrack(track, participant) {
     console.log(`Attempting to display ${track.kind} track for ${participant.identity}:`);
+    const element = track.attach();
+    console.log(`${track.kind} element for ${participant.identity}:`, element);
     if (track.kind === "video") {
-        const videoElement = track.attach();
-        console.log(`Video element for ${participant.identity}:`, videoElement);
 
         if (participant.identity === room.value.localParticipant.identity) {
             console.log('Appending to local video ref:', localVideoRef.value);
-            localVideoRef.value.appendChild(videoElement);
+            localVideoRef.value.appendChild(element);
         } else {
             console.log('Appending to remote video ref:', remoteVideoRef.value);
-            remoteVideoRef.value.appendChild(videoElement);
+            remoteVideoRef.value.appendChild(element);
         }
+    } else if (track.kind === "audio" && participant.identity !== room.value.localParticipant.identity) {
+        // Appending remote audio element to the body
+        document.body.appendChild(element);
     }
 }
 
@@ -102,20 +119,6 @@ function handleDisconnectedParticipant(participant) {
         participantDiv.remove();
     }
 }
-
-onMounted(() => {
-    const initializeRoom = async () => {
-        storedContacts.value = JSON.parse(localStorage.getItem('contacts')) || [];
-        if (storedContacts.value.length > roomName) {
-            relation.value = storedContacts.value[roomName].relation;
-            name.value = storedContacts.value[roomName].name;
-            cell.value = storedContacts.value[roomName].cell;
-        }
-        const token = await fetchAccessToken(roomName);
-        await connectToRoom(token);
-    };
-    initializeRoom();
-});
 
 onUnmounted(() => {
     if (room.value) {
