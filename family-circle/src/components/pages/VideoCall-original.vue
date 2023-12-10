@@ -129,40 +129,26 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-2">
-    <!-- Video Text -->
-    <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
-      <span class="text-black">
-        You’re speaking to your
-      </span>
-      <span class="text-darkgreen font-bold">
-        {{ relation }}
-      </span>
-      <span class="text-black">, </span>
-      <span class="text-darkblue font-bold">
-        {{ name }}
-      </span>
-      <span class="text-black">.</span>
+  <div class="grid grid-rows-3 grid-cols-3 gap-4 w-[40rem] h-screen">
+    <!-- Text Section -->
+    <h1 class="row-start-1 row-end-2 col-start-1 col-end-3 bg-darkblue">
+      You are speaking to your {{ relation }}, {{ name }}.
+    </h1>
+    <!-- Local User's Camera -->
+    <div ref="localVideoRef" class="row-start-1 row-end-2 col-start-3 col-end-4 bg-lightgrey">
+      <!-- Local video will be attached here -->
     </div>
-    <!-- Local Video Screen -->
-    <div ref="localVideoRef" class="mx-auto w-[319px] h-[193px] bg-lightgrey border border-black">
-
+    <!-- Remote User's Camera -->
+    <div ref="remoteVideoRef" class="row-start-2 row-end-4 col-start-1 col-end-3 bg-darkgrey">
+      <!-- Remote video will be attached here -->
     </div>
-    <!-- Remote Video Screen -->
-    <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
-      <!-- remote video will be attached here -->
-    </div>
-    <div class="mx-auto flex flex-col space-y-36">
-      <div class="">
-        <button>
-          <VolumePanel/>
-        </button>
-      </div>
-      <div>
-        <button>
-          <EndCallButton/>
-        </button>
-      </div>
-    </div>
+    <!-- Volume Buttons -->
+    <button class="row-start-2 row-end-3 col-start-3 col-end-4 bg-lightblue">
+      <VolumePanel/>
+    </button>
+    <!-- End Call Button -->
+    <button class="row-start-3 row-end-4 col-start-3 col-end-4 bg-darkred">
+      <EndCallButton/>
+    </button>
   </div>
 </template>
