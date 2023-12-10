@@ -1,12 +1,10 @@
-import dotenv from 'dotenv';
+import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import express from 'express';
 import path from 'path';
 import twilio from 'twilio';
 import sgMail from '@sendgrid/mail';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
-
-dotenv.config();
 
 const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
@@ -17,6 +15,20 @@ const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET;
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 const SENDGRID_API_KEY=process.env.SENDGRID_API_KEY;
 
+const ssmClient = new SSMClient({ region: "us-east-2" });
+
+const getParameter = async (parameterName) => {
+  const command = new GetParameterCommand({ Name: parameterName, WithDecryption: true });
+  const response = await ssmClient.send(command);
+  return response.Parameter.Value;
+}
+
+const initializeConfig = async () => {
+  process.env.TWILIO_API_KEY_SID = await getParameter("/amplify/familycircle/twilio/api_key_sid");
+  process.env.TWILIO_API_KEY_SECRET = await getParameter("/amplify/familycircle/twilio/api_key_secret");
+  process.env.TWILIO_ACCOUNT_SID = await getParameter("/amplify/familycircle/twilio/account_sid");
+  process.env.SENDGRID_API_KEY = await getParameter("/amplify/familycircle/sendgrid/api_key");
+};
 // Use the Express JSON middleware
 app.use(express.json());
 
@@ -103,7 +115,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// Start the Express server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Call initializeConfig at the start of your application
+initializeConfig().then(() => {
+  // Start the Express server inside the then() block
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}).catch(error => {
+  console.error("Failed to initialize configuration:", error);
 });
