@@ -9,11 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
-const port = process.env.PORT || 5000;
-const TWILIO_API_KEY_SID = process.env.TWILIO_ACCOUNT_SID;
-const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET;
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const SENDGRID_API_KEY=process.env.SENDGRID_API_KEY;
+const port = PORT || 5000;
 
 const ssmClient = new SSMClient({ region: "us-east-2" });
 
@@ -24,23 +20,24 @@ const getParameter = async (parameterName) => {
 }
 
 const initializeConfig = async () => {
-  process.env.TWILIO_API_KEY_SID = await getParameter("/amplify/familycircle/twilio/api_key_sid");
-  process.env.TWILIO_API_KEY_SECRET = await getParameter("/amplify/familycircle/twilio/api_key_secret");
-  process.env.TWILIO_ACCOUNT_SID = await getParameter("/amplify/familycircle/twilio/account_sid");
-  process.env.SENDGRID_API_KEY = await getParameter("/amplify/familycircle/sendgrid/api_key");
+  const TWILIO_API_KEY_SID = await getParameter("/amplify/familycircle/twilio/api_key_sid");
+  const TWILIO_API_KEY_SECRET = await getParameter("/amplify/familycircle/twilio/api_key_secret");
+  const TWILIO_ACCOUNT_SID = await getParameter("/amplify/familycircle/twilio/account_sid");
+  const SENDGRID_API_KEY = await getParameter("/amplify/familycircle/sendgrid/api_key");
+
+  // Create the Twilio client
+  const twilioClient = twilio(
+    TWILIO_API_KEY_SID,
+    TWILIO_API_KEY_SECRET,
+    { accountSid: TWILIO_ACCOUNT_SID }
+  );
+
+  // Set the API Key for SendGrid Mail
+  sgMail.setApiKey(SENDGRID_API_KEY);
 };
+
 // Use the Express JSON middleware
 app.use(express.json());
-
-// Set the API Key for SendGrid Mail
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-// Create the Twilio client
-const twilioClient = twilio(
-  process.env.TWILIO_API_KEY_SID,
-  process.env.TWILIO_API_KEY_SECRET,
-  { accountSid: process.env.TWILIO_ACCOUNT_SID }
-);
 
 // Function to find or create a room
 const findOrCreateRoom = async (roomName) => {
@@ -63,9 +60,9 @@ const findOrCreateRoom = async (roomName) => {
 // Function to generate an Access Token
 const getAccessToken = (roomName) => {
   const token = new AccessToken(
-    process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_API_KEY_SID,
-    process.env.TWILIO_API_KEY_SECRET,
+    TWILIO_ACCOUNT_SID,
+    TWILIO_API_KEY_SID,
+    TWILIO_API_KEY_SECRET,
     { identity: uuidv4() }
   );
   const videoGrant = new VideoGrant({ room: roomName });
