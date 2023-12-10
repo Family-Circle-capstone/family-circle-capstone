@@ -129,43 +129,39 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2">
-    <div class="flex flex-col space-y-6">
-      <!-- Video Text -->
-      <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
+  <div class="grid grid-cols-2 gap-2">
+    <!-- Video Text -->
+    <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
       <span class="text-black">
         You’re speaking to your
       </span>
-        <span class="text-darkgreen font-bold">
+      <span class="text-darkgreen font-bold">
         {{ relation }}
       </span>
-        <span class="text-black">, </span>
-        <span class="text-darkblue font-bold">
+      <span class="text-black">, </span>
+      <span class="text-darkblue font-bold">
         {{ name }}
       </span>
-        <span class="text-black">.</span>
-      </div>
-      <!-- Remote Video Screen -->
-      <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
-        <!-- remote video will be attached here -->
-      </div>
+      <span class="text-black">.</span>
     </div>
-    <div class="flex flex-col space-y-16">
-      <!-- Local Video Screen -->
-      <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
+    <!-- Local Video Screen -->
+    <div ref="localVideoRef" class="mx-auto w-[319px] h-[193px] bg-lightgrey border border-black">
 
+    </div>
+    <!-- Remote Video Screen -->
+    <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
+      <!-- remote video will be attached here -->
+    </div>
+    <div class="mx-auto flex flex-col space-y-36">
+      <div class="">
+        <button>
+          <VolumePanel/>
+        </button>
       </div>
-      <div class="mx-auto space-y-36">
-        <div class>
-          <button>
-            <VolumePanel/>
-          </button>
-        </div>
-        <div>
-          <button>
-            <EndCallButton/>
-          </button>
-        </div>
+      <div>
+        <button>
+          <EndCallButton/>
+        </button>
       </div>
     </div>
   </div>
