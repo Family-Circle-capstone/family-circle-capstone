@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, markRaw } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import TwilioVideo from 'twilio-video';
 import EndCallButton from '../buttons/video_call/EndCall.vue';
 import VolumePanel from '../buttons/video_call/VolumePanel.vue';
@@ -12,8 +12,49 @@ let email = ref('');
 const localVideoRef = ref(null);
 const remoteVideoRef = ref(null);
 const route = useRoute();
+const router = useRouter();
 const roomName = route.params.contactIndex;
 let room = ref(null);
+
+// Import speech recognition related functionality
+import { watch, ref as refSpeech, onMounted as onMountedSpeech, onUnmounted as onUnmountedSpeech } from 'vue';
+const voiceCommand = refSpeech('');
+
+onMountedSpeech(() => {
+// Add event listener for the 'voiceCommand' event
+document.addEventListener('voiceCommand', handleVoiceCommand);
+});
+
+onUnmountedSpeech(() => {
+// Remove event listener when the component is unmounted
+document.removeEventListener('voiceCommand', handleVoiceCommand);
+});
+
+// Function to handle the voice command for ending the call
+const handleVoiceCommand = (event) => {
+const command = event.detail.toLowerCase();
+console.log('Heard command:', command);
+
+// Check if the command is "end circle call"
+if (command === 'end circle call') {
+    // Simulate a click on the EndCallButton
+    handleEndCallButtonClick();
+}
+};
+
+// Function to simulate the click on the EndCallButton
+const handleEndCallButtonClick = () => {
+// Log for debugging
+console.log('End Call Button Clicked!');
+// Perform actions you want to do when the call ends
+  // Disconnect from the Twilio room
+  if (room.value) {
+    room.value.disconnect();
+  }
+
+  // Navigate back to the home route
+  router.push('/');
+};
 
 onMounted(() => {
     const initializeRoom = async () => {
