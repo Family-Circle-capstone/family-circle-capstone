@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Configure local development environment variables
-dotenv.config({ path: './.env.production' });
+dotenv.config({ path: './.env' });
 
 // Create the Twilio client
 console.log(process.env.TWILIO_ACCOUNT_SID);
