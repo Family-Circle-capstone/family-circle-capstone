@@ -51,7 +51,7 @@ const findOrCreateRoom = async (roomName) => {
 // Function to close a room
 const closeRoom = async (roomName) => {
   try {
-    await twilioClient.video.rooms(roomName).update({ status: 'completed' });
+    await twilioClient.video.v1.rooms(roomName).update({ status: 'completed' });
     console.log(`Room ${roomName} closed.`);
   } catch (error) {
     console.error(`Error closing room ${roomName}:`, error);
@@ -117,11 +117,13 @@ app.post("/join-room", async (req, res) => {
 
 // Route to leave a room
 app.post("/leave-room", async (req, res) => {
+  console.log("Leave room route hit")
   const { roomName } = req.body;
   if (activeRooms[roomName]) {
     activeRooms[roomName] -= 1;
     if (activeRooms[roomName] === 0) {
       await closeRoom(roomName);
+      console.log(`Room ${roomName} closed.`);
       delete activeRooms[roomName];
     }
   }

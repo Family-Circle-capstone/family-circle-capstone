@@ -125,6 +125,7 @@ function handleDisconnectedParticipant(participant) {
 }
 
 function leaveRoom() {
+  console.log(`Leaving room: ${roomName}`);
   fetch('/leave-room', {
     method: 'POST',
     headers: {
@@ -135,6 +136,7 @@ function leaveRoom() {
   .then(response => response.json())
   .then(data => console.log('Room left:', data))
   .catch(error => console.error('Error leaving room:', error));
+  router.push('/');
 }
 
 onUnmounted(() => {
@@ -184,7 +186,7 @@ onUnmounted(() => {
           <!-- End Call Button -->
           <div>
             <button>
-              <EndCallButton/>
+              <EndCallButton @endCall="leaveRoom" />
             </button>
           </div>
         </div>
