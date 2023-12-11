@@ -1,4 +1,3 @@
-import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import express from 'express';
 import path from 'path';
 import twilio from 'twilio';
@@ -11,25 +10,15 @@ const VideoGrant = AccessToken.VideoGrant;
 const app = express();
 const port = process.env.PORT || 5000;
 
-const ssmClient = new SSMClient({ region: "us-east-2" });
+// Create the Twilio client
+const twilioClient = twilio(
+  process.env.TWILIO_API_KEY_SID,
+  process.env.TWILIO_API_KEY_SECRET,
+  { accountSid: process.env.TWILIO_ACCOUNT_SID }
+);
 
-const getParameter = async (parameterName) => {
-  const command = new GetParameterCommand({ Name: parameterName, WithDecryption: true });
-  const response = await ssmClient.send(command);
-  return response.Parameter.Value;
-}
-
-const initializeConfig = async () => {
-  // Create the Twilio client
-  const twilioClient = twilio(
-    process.env.TWILIO_API_KEY_SID,
-    process.env.TWILIO_API_KEY_SECRET,
-    { accountSid: process.env.TWILIO_ACCOUNT_SID }
-  );
-
-  // Set the API Key for SendGrid Mail
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-};
+// Set the API Key for SendGrid Mail
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Use the Express JSON middleware
 app.use(express.json());
@@ -38,14 +27,14 @@ app.use(express.json());
 const findOrCreateRoom = async (roomName) => {
   try {
     await twilioClient.video.v1.rooms(roomName).fetch();
-    return false; //Room already exists
+    return false; // Room already exists
   } catch (error) {
     if (error.code == 20404) {
       await twilioClient.video.v1.rooms.create({
         uniqueName: roomName,
         type: "go",
       });
-      return true;
+      return true; // New room created
     } else {
       throw error;
     }
@@ -69,7 +58,7 @@ const sendEmail = (toEmail, roomName) => {
   const msg = {
     to: toEmail,
     from: 'info@familycircle.site',
-    subject: 'Your loved one is callign you!',
+    subject: 'Your loved one is calling you!',
     html: `Your loved one is calling you!<br><a href=https://www.familycircle/video-call/${roomName}">Answer Now</a>`,
   };
 
@@ -107,12 +96,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// Call initializeConfig at the start of your application
-initializeConfig().then(() => {
-  // Start the Express server inside the then() block
-  app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-  });
-}).catch(error => {
-  console.error("Failed to initialize configuration:", error);
+// Start the Express Server
+app.listen(port, () => {
+  console.log(`Server running on port $(port)`);
 });
