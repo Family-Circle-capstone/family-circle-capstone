@@ -10,12 +10,13 @@ const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
 const port = process.env.PORT || 5000;
+let sgkey = '';
 
 // Configure local development environment variables
 dotenv.config({ path: './.env.production' });
+sgkey = sgkey + process.env.SENDGRID_API_KEY;
 
 // Create the Twilio client
-console.log(process.env.TWILIO_ACCOUNT_SID);
 const twilioClient = twilio(
   process.env.TWILIO_API_KEY_SID,
   process.env.TWILIO_API_KEY_SECRET,
@@ -70,11 +71,15 @@ const sendEmail = (toEmail, roomName) => {
   sgMail
     .send(msg)
     .then(() => console.log('Email sent'))
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error('Error sending email:', error);
+      console.error(error.response.body);
+    });
 };
 
 // Route to join a room
 app.post("/join-room", async (req, res) => {
+  console.log("Join-room route accessed", req.body);
   if (!req.body || !req.body.roomName) {
     return res.status(400).send("Must include roomName argument.");
   }
@@ -82,10 +87,12 @@ app.post("/join-room", async (req, res) => {
   const email = req.body.email;
 
   const isNewRoom = await findOrCreateRoom(roomName);
+  console.log(`Room ${roomName} creation status:`, isNewRoom);
   const token = getAccessToken(roomName);
 
   // Send an email only if a new room is created and if an email is provided
   if (isNewRoom && email) {
+    console.log(`Sending email to ${email} for room ${roomName}`);
     sendEmail(email, roomName);
   }
 
@@ -103,5 +110,5 @@ app.get('*', (req, res) => {
 
 // Start the Express Server
 app.listen(port, () => {
-  console.log(`Server running on port $(port)`);
+  console.log(`Server running on port ${port}`);
 });
