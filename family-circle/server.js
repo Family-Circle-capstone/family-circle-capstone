@@ -10,6 +10,7 @@ const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
 const port = process.env.PORT || 5000;
+let activeRooms = {};
 let sgkey = '';
 
 // Configure local development environment variables
@@ -47,6 +48,15 @@ const findOrCreateRoom = async (roomName) => {
   }
 };
 
+// Function to close a room
+const closeRoom = async (roomName) => {
+  try {
+    await twilioClient.video.rooms(roomName).update({ status: 'completed' });
+    console.log(`Room ${roomName} closed.`);
+  } catch (error) {
+    console.error(`Error closing room ${roomName}:`, error);
+  }
+};
 // Function to generate an Access Token
 const getAccessToken = (roomName) => {
   const token = new AccessToken(
@@ -87,6 +97,12 @@ app.post("/join-room", async (req, res) => {
   const email = req.body.email;
 
   const isNewRoom = await findOrCreateRoom(roomName);
+  if (isNewRoom) {
+    activeRooms[roomName] = 1;
+  } else {
+    activeRooms[roomName] += 1;
+  }
+
   console.log(`Room ${roomName} creation status:`, isNewRoom);
   const token = getAccessToken(roomName);
 
@@ -97,6 +113,19 @@ app.post("/join-room", async (req, res) => {
   }
 
   res.send({ token: token });
+});
+
+// Route to leave a room
+app.post("/leave-room", async (req, res) => {
+  const { roomName } = req.body;
+  if (activeRooms[roomName]) {
+    activeRooms[roomName] -= 1;
+    if (activeRooms[roomName] === 0) {
+      await closeRoom(roomName);
+      delete activeRooms[roomName];
+    }
+  }
+  res.send({ message: "Participant left room." });
 });
 
 // Serve Vue app in production
