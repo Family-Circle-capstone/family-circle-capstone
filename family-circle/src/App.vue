@@ -6,6 +6,7 @@
   ]
 
   localStorage.setItem('contacts', JSON.stringify(contacts));
+  localStorage.setItem('pin', '1234');
 </script>
 
 <template>
