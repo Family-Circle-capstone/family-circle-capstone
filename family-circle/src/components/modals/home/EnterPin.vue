@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 
@@ -10,8 +10,13 @@ const router = useRouter()
 
 onClickOutside(modal, () => (isModalOpen.value = false));
 
+let correctPin = ref(localStorage.getItem('pin'))
+watchEffect(() => {
+  correctPin = localStorage.getItem('pin')
+});
+
 const checkPinAndNavigate = () => {
-  const correctPin = window.localStorage.getItem('pin')
+
   if (enteredPin.value === correctPin) {
     router.push('/admin') 
   } else {
