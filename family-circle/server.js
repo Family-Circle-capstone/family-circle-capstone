@@ -4,13 +4,18 @@ import twilio from 'twilio';
 import sgMail from '@sendgrid/mail';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv';
 
 const AccessToken = twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Configure local development environment variables
+dotenv.config({ path: './.env.production' });
+
 // Create the Twilio client
+console.log(process.env.TWILIO_ACCOUNT_SID);
 const twilioClient = twilio(
   process.env.TWILIO_API_KEY_SID,
   process.env.TWILIO_API_KEY_SECRET,
