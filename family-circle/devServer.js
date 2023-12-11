@@ -15,8 +15,7 @@ const port = process.env.PORT || 5000;
 dotenv.config({ path: './.env.production' });
 
 // Create the Twilio client
-console.log('TWILIO_API_KEY_SID:', process.env.TWILIO_API_KEY_SID);
-console.log('TWILIO_API_KEY_SECRET:', process.env.TWILIO_API_KEY_SECRET);
+console.log(process.env.TWILIO_ACCOUNT_SID);
 const twilioClient = twilio(
   process.env.TWILIO_API_KEY_SID,
   process.env.TWILIO_API_KEY_SECRET,
