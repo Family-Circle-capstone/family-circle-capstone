@@ -24,7 +24,7 @@ const twilioClient = twilio(
 );
 
 // Set the API Key for SendGrid Mail
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(sgkey);
 
 // Use the Express JSON middleware
 app.use(express.json());
