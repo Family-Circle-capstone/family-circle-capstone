@@ -9,7 +9,7 @@ const getComponentInfo = (contact) => {
   if (contact.name) {
     return { type: ContactCard };
   } else {
-    return { type: 'empty', width: '300px', height: '300px' }; // Set the desired width and height
+    return { type: 'empty', width: '300px', height: '300px' };
   }
 };
 </script>
