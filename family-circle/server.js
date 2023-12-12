@@ -118,7 +118,7 @@ app.post("/join-room", async (req, res) => {
 // Route to leave a room
 app.post("/leave-room", async (req, res) => {
   console.log("Leave room route hit")
-  const { roomName } = req.body;
+  const roomName = req.body.roomName;
   if (activeRooms[roomName]) {
     activeRooms[roomName] -= 1;
     if (activeRooms[roomName] === 0) {
