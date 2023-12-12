@@ -36,9 +36,7 @@ const getComponentInfo = (contact) => {
         <EnterPinModal/>
       </div>
       <!-- contact four button -->
-      <div class="w-[300px] h-[300px] relative">
-        <component :is="getComponentInfo(contacts[3]).type" :index="3" :style="getComponentInfo(contacts[3])" />
-      </div>
+      <component :is="getComponentInfo(contacts[3]).type" :index="3" :style="getComponentInfo(contacts[3])" />
     </div>
   </div>
 </template>
