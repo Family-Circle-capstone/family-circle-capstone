@@ -10,21 +10,32 @@ const modal = ref(null)
 const oldPin = ref('')
 const newPin = ref('')
 const confirmPin = ref('')
-const router = useRouter()
 
 const checkPinAndUpdate = () => {
-  const storedPin = window.localStorage.getItem('pin')
+  const storedPin = window.localStorage.getItem('pin');
+
+  console.log('Old PIN:', oldPin.value);
+  console.log('Stored PIN:', storedPin);
+
   if (oldPin.value === storedPin) {
     if (newPin.value === confirmPin.value) {
-      window.localStorage.setItem('pin', newPin.value)
-      console.log(localStorage.getItem('pin'))
+      // Update the PIN immediately
+      window.localStorage.setItem('pin', newPin.value);
+
+      console.log('Updated PIN:', localStorage.getItem('pin')); // Log the updated value
+
+      // Close the modal
+      isModalOpen.value = false;
+
     } else {
-      alert('New PINs do not match')
+      alert('New PINs do not match');
     }
   } else {
     alert('Incorrect PIN');
   }
 }
+
+
 
 onClickOutside(modal, () => (isModalOpen.value = false));
 </script>
@@ -68,7 +79,7 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             <input v-model="confirmPin" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="confirmPin" type="password" pattern="[0-9]{4}" maxlength="4">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button @click="checkPinAndUpdate" class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
+            <button @click="checkPinAndUpdate" class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="button">
               Update
             </button>
             <!-- <a class="p-2 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

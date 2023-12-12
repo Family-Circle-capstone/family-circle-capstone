@@ -12,17 +12,21 @@ onClickOutside(modal, () => (isModalOpen.value = false));
 
 let correctPin = ref(localStorage.getItem('pin'))
 watchEffect(() => {
-  correctPin = localStorage.getItem('pin')
+  correctPin.value = localStorage.getItem('pin')
 });
 
 const checkPinAndNavigate = () => {
+  console.log('Entered PIN:', enteredPin.value);
+  console.log('Correct PIN:', correctPin.value);
 
-  if (enteredPin.value === correctPin) {
-    router.push('/admin') 
+  if (enteredPin.value === correctPin.value) {
+    console.log('Navigating to /admin');
+    router.push('/admin');
   } else {
-    alert('Incorrect PIN')
+    alert('Incorrect PIN');
   }
-}
+};
+
 </script>
 
 <template>
