@@ -167,7 +167,7 @@ onUnmounted(() => {
     <div class="mx-auto">
       <div>
         <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" class="mx-auto h-[595px] w-[595x] bg-lightgrey border border-black">
+        <div ref="remoteVideoRef" id="remoteVideo" class="mx-auto h-[595px] w-[595x] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
           <div class="absolute h-[600px] w-[445px]">
             <!-- Local Video Screen -->
@@ -184,3 +184,13 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style>
+div#remoteVideo video
+{
+  width: 50%;
+  height: 15%;
+  background-color: #272726;
+  background-repeat: no-repeat;
+}
+</style>
