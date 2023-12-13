@@ -3,7 +3,8 @@ import { ref, onMounted, onUnmounted, markRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import TwilioVideo from 'twilio-video';
 import EndCallButton from '../buttons/video_call/EndCall.vue';
-import VolumePanel from '../buttons/video_call/VolumePanel.vue';
+import VolumeUpButton from '../buttons/video_call/VolumeUp.vue';
+import VolumeDownButton from '../buttons/video_call/VolumeDown.vue';
 
 let storedContacts = ref([]);
 let relation = ref('');
@@ -149,43 +150,32 @@ onUnmounted(() => {
 
 <template>
   <div class="mx-auto">
-    <div class="grid grid-cols-2">
-      <div class="flex flex-col space-y-6">
-        <!-- Video Text -->
-        <div class="text-left w-[720px] h-[126px] text-[40px] font-normal font-['Arial']">
+    <!-- Video Text -->
+    <div class="mx-auto w-auto h-[126px] text-[40px] font-normal font-['Arial']">
           <span class="text-black">
             You’re speaking to your
           </span>
-          <span class="text-darkgreen font-bold">
+      <span class="text-darkgreen font-bold">
             {{ relation }}
           </span>
-          <span class="text-black">, </span>
-          <span class="text-darkblue font-bold">
+      <span class="text-black">, </span>
+      <span class="text-darkblue font-bold">
             {{ name }}
           </span>
-          <span class="text-black">.</span>
-        </div>
+      <span class="text-black">.</span>
+    </div>
+    <div class="mx-auto">
+      <div>
         <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" class="w-[719px] h-[593px] bg-lightgrey border border-black">
+        <div ref="remoteVideoRef" class="mx-auto p-4 w-[480px] h-[640px] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
-        </div>
-      </div>
-      <div class="flex flex-col space-y-16">
-        <!-- Local Video Screen -->
-        <div ref="localVideoRef" class="mx-auto w-[200px] h-[125px] bg-lightgrey border border-black">
-          <!-- local video will be attached here -->
-        </div>
-        <!-- Video Control Buttons -->
-        <div class="mx-auto space-y-36">
-          <!-- Volume Panel Buttons -->
-          <div class>
-            <button>
-              <VolumePanel/>
-            </button>
-          </div>
-          <!-- End Call Button -->
-          <div>
-            <button>
+          <div class="absolute h-[605px] w-[445px]">
+            <!-- Local Video Screen -->
+            <div ref="localVideoRef" class="absolute bottom-0 left-0 w-[200px] h-[150px] bg-lightgrey border border-black">
+              <!-- local video will be attached here -->
+            </div>
+            <!-- End Call Button -->
+            <button class="absolute bottom-0 right-0">
               <EndCallButton @endCall="leaveRoom" />
             </button>
           </div>
