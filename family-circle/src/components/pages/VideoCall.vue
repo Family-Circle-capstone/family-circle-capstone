@@ -188,10 +188,8 @@ onUnmounted(() => {
 <style>
 div#remoteVideo video
 {
-  width: 50%;
-  height: 15%;
-  background-color: #272726;
-  background-repeat: no-repeat;
+  width: 1500%;
+  height: 100%;
 }
 
 div#localVideo video
