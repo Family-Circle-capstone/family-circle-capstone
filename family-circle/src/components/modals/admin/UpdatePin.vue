@@ -2,40 +2,9 @@
 import UpdatePinButton from '../../buttons/admin/UpdatePin.vue'
 import { ref } from 'vue';
 import { onClickOutside } from '@vueuse/core';
-import { useRouter } from 'vue-router';
 
 const isModalOpen = ref(false)
 const modal = ref(null)
-
-const oldPin = ref('')
-const newPin = ref('')
-const confirmPin = ref('')
-
-const checkPinAndUpdate = () => {
-  const storedPin = window.localStorage.getItem('pin');
-
-  console.log('Old PIN:', oldPin.value);
-  console.log('Stored PIN:', storedPin);
-
-  if (oldPin.value === storedPin) {
-    if (newPin.value === confirmPin.value) {
-      // Update the PIN immediately
-      window.localStorage.setItem('pin', newPin.value);
-
-      console.log('Updated PIN:', localStorage.getItem('pin')); // Log the updated value
-
-      // Close the modal
-      isModalOpen.value = false;
-
-    } else {
-      alert('New PINs do not match');
-    }
-  } else {
-    alert('Incorrect PIN');
-  }
-}
-
-
 
 onClickOutside(modal, () => (isModalOpen.value = false));
 </script>
@@ -60,7 +29,7 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             </label>
           </div>
           <div class="md:w-2/3">
-            <input v-model="oldPin" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="oldPin" type="password" pattern="[0-9]{4}" maxlength="4">
+            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
@@ -68,7 +37,7 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             </label>
           </div>
           <div class="md:w-2/3">
-            <input v-model="newPin" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="newPin" type="password" pattern="[0-9]{4}" maxlength="4">
+            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
@@ -76,10 +45,10 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             </label>
           </div>
           <div class="md:w-2/3">
-            <input v-model="confirmPin" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="confirmPin" type="password" pattern="[0-9]{4}" maxlength="4">
+            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button @click="checkPinAndUpdate" class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="button">
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
               Update
             </button>
             <!-- <a class="p-2 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
