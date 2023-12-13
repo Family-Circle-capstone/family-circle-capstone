@@ -1,17 +1,6 @@
 <script setup>
-import ContactCard from '../contacts/home/ContactCard.vue';
-import EnterPinModal from "../modals/home/EnterPin.vue";
-
-let contacts = JSON.parse(localStorage.getItem('contacts'));
-
-// Computed property to determine the component type and additional properties
-const getComponentInfo = (contact) => {
-  if (contact.name) {
-    return { type: ContactCard };
-  } else {
-    return { type: 'empty', width: '300px', height: '300px' };
-  }
-};
+  import ContactCard from '../contacts/home/ContactCard.vue';
+  import EnterPinModal from "../modals/home/EnterPin.vue";
 </script>
 
 <template>
@@ -19,10 +8,10 @@ const getComponentInfo = (contact) => {
     <!-- contacts container -->
     <div class="grid grid-cols-3 place-items-center max-h-screen">
       <!-- contact one button -->
-      <component :is="getComponentInfo(contacts[0]).type" :index="0" :style="getComponentInfo(contacts[0])" />
+      <contact-card :index="0"/>
       <div><!--grid spacing--></div>
       <!-- contact two button -->
-      <component :is="getComponentInfo(contacts[1]).type" :index="1" :style="getComponentInfo(contacts[1])" />
+      <contact-card :index="1"/>
       <div><!--grid spacing--></div>
       <!-- logo -->
       <div>
@@ -30,13 +19,18 @@ const getComponentInfo = (contact) => {
       </div>
       <div><!--grid spacing--></div>
       <!-- contact three button -->
-      <component :is="getComponentInfo(contacts[2]).type" :index="2" :style="getComponentInfo(contacts[2])" />
+      <contact-card :index="2"/>
       <!-- admin button -->
       <div class="pt-8 flex items-end justify-center">
+          <!-- <router-link to="/admin">
+            <img src="../../assets/home/gear.svg" alt="settings">
+          </router-link> -->
         <EnterPinModal/>
       </div>
       <!-- contact four button -->
-      <component :is="getComponentInfo(contacts[3]).type" :index="3" :style="getComponentInfo(contacts[3])" />
+      <div class="w-[300px] h-[300px] relative">
+        <contact-card :index="3"/>
+      </div>
     </div>
   </div>
 </template>

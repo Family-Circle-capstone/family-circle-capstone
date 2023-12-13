@@ -4,11 +4,6 @@ import CancelButton from '../buttons/admin/Cancel.vue'
 import ContactCard from "../contacts/admin/ContactCard.vue";
 import AddContactCard from "../contacts/admin/AddContactCard.vue";
 import UpdatePinModal from "../modals/admin/UpdatePin.vue";
-
-// Get contacts array from localstorage
-let contacts = JSON.parse(localStorage.getItem('contacts'));
-
-const getComponentType = (contact) => contact.name ? ContactCard : AddContactCard;
 </script>
 
 <template>
@@ -20,7 +15,13 @@ const getComponentType = (contact) => contact.name ? ContactCard : AddContactCar
     </div>
     <!-- grid container -->
     <div class="grid grid-cols-2 gap-8 pb-8">
-      <component v-for="(contact, index) in contacts" :is="getComponentType(contact)" :key="index" :index="index" :contact="contact" />
+      <contact-card :index="0"/>
+      <!-- contact two container -->
+      <contact-card :index="1"/>
+      <!-- contact three container -->
+      <contact-card :index="2"/>
+      <!-- contact four container -->
+      <contact-card :index="3"/>
     </div>
     <!-- admin buttons container -->
     <div class="grid grid-rows-3 gap-4 pt-8">
