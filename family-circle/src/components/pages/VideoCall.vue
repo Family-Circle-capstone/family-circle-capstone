@@ -167,11 +167,11 @@ onUnmounted(() => {
     <div class="mx-auto">
       <div>
         <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" id="remoteVideo" class="mx-auto h-[595px] w-[450x] bg-lightgrey border border-black">
+        <div ref="remoteVideoRef" id="remoteVideo" class="mx-auto h-[595px] w-[595mx] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
           <div class="absolute h-[600px] w-[445px]">
             <!-- Local Video Screen -->
-            <div ref="localVideoRef" class="absolute bottom-5 left-4 w-[200px] h-[150px] bg-lightgrey border border-black">
+            <div ref="localVideoRef" id="localVideo" class="absolute bottom-5 left-4 w-[200px] h-[150px] bg-lightgrey border border-black">
               <!-- local video will be attached here -->
             </div>
             <!-- End Call Button -->
@@ -192,5 +192,11 @@ div#remoteVideo video
   height: 15%;
   background-color: #272726;
   background-repeat: no-repeat;
+}
+
+div#localVideo video
+{
+  width: 100%;
+  height: 100%;
 }
 </style>
