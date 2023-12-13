@@ -151,7 +151,7 @@ onUnmounted(() => {
 <template>
   <div class="mx-auto">
     <!-- Video Text -->
-    <div class="mx-auto w-auto h-[126px] text-[40px] font-normal font-['Arial']">
+    <div class="mx-auto pb-5 text-[40px] font-normal font-['Arial']">
           <span class="text-black">
             You’re speaking to your
           </span>
