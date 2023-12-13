@@ -21,7 +21,7 @@ import UpdatePinModal from "../modals/admin/UpdatePin.vue";
       <!-- contact three container -->
       <contact-card :index="2"/>
       <!-- contact four container -->
-      <add-contact-card/>
+      <contact-card :index="3"/>
     </div>
     <!-- admin buttons container -->
     <div class="grid grid-rows-3 gap-4 pt-8">
