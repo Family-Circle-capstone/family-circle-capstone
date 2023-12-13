@@ -1,18 +1,22 @@
 <script>
+import { ref, onMounted } from "vue";
 import DeleteContactModal from "../../modals/admin/DeleteContact.vue";
 import EditContactModal from "../../modals/admin/EditContact.vue";
 
 export default {
   components: {EditContactModal, DeleteContactModal},
   props: ['index'],
-  data() {
+  setup(props) {
+    const contact = ref({}); // Declare contact as a reactive property
+
+    onMounted(() => {
+      let contacts = JSON.parse(localStorage.getItem('contacts'));
+      contact.value = contacts[props.index];
+    })
+
     return {
-      contact: {}
-    }
-  },
-  created() {
-    let contacts = JSON.parse(localStorage.getItem('contacts'));
-    this.contact = contacts[this.index];
+      contact
+    };
   }
 }
 </script>
@@ -25,7 +29,7 @@ export default {
         <!-- edit button -->
         <EditContactModal/>
         <!-- delete button -->
-        <DeleteContactModal/>
+        <DeleteContactModal :contact="contact" />
       </div>
       <!-- contact one info -->
       <img class="object-cover w-[95px] h-[98px] left-[26px] top-[30px] absolute border border-lightblue" :src="contact.img_src" alt="profile-pic"/>
