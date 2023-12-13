@@ -47,6 +47,7 @@ async function connectToRoom(token) {
   try {
     let connectedRoom = await TwilioVideo.connect(token, {
       room: roomName,
+      video: { width: 640 }
     });
     connectedRoom = markRaw(connectedRoom);
     room.value = connectedRoom;
