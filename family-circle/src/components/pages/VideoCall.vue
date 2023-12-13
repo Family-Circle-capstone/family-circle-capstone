@@ -134,9 +134,9 @@ function leaveRoom() {
     },
     body: JSON.stringify({ roomName }),
   })
-  .then(response => response.json())
-  .then(data => console.log('Room left:', data))
-  .catch(error => console.error('Error leaving room:', error));
+      .then(response => response.json())
+      .then(data => console.log('Room left:', data))
+      .catch(error => console.error('Error leaving room:', error));
   router.push('/');
 }
 
@@ -167,11 +167,11 @@ onUnmounted(() => {
     <div class="mx-auto">
       <div>
         <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" id="remoteVideo" class="mx-auto h-[595px] w-[595mx] bg-lightgrey border border-black">
+        <div ref="remoteVideoRef" class="mx-auto h-[600px] w-[445px] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
-          <div class="absolute h-[600px] w-[445px]">
+          <div class="absolute h-[605px] w-[445px]">
             <!-- Local Video Screen -->
-            <div ref="localVideoRef" id="localVideo" class="absolute bottom-5 left-4 w-[200px] h-[150px] bg-lightgrey border border-black">
+            <div ref="localVideoRef" class="absolute bottom-5 left-4 w-[200px] h-[150px] bg-lightgrey border border-black">
               <!-- local video will be attached here -->
             </div>
             <!-- End Call Button -->
@@ -184,17 +184,3 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
-
-<style>
-div#remoteVideo video
-{
-  width: 1500%;
-  height: 100%;
-}
-
-div#localVideo video
-{
-  width: 100%;
-  height: 100%;
-}
-</style>
