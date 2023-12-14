@@ -24,15 +24,56 @@ const contacts = inject('contacts');
 const name = ref('');
 const relation = ref('');
 const email = ref('');
+const file = ref(null);
+
+// Create a new contact object
+let newContact = {
+  name: name.value,
+  relation: relation.value,
+  email: email.value,
+  img_src: '' // Keep the image URL empty for now
+};
+
+// Handle file input change
+const handleFileChange = () => {
+  if (file.value.files[0]) {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const img = new Image();
+      img.src = reader.result;
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Draw the image onto the canvas
+        ctx.drawImage(img, 0, 0);
+
+        // Get a compressed version of the image
+        let quality = 0.8;
+        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+        // Check the size of the dataUrl string
+        while (dataUrl.length / 1024 > 1024 && quality > 0) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        // Add the compressed image to the new contact
+        newContact.img_src = dataUrl;
+      };
+    };
+
+    reader.readAsDataURL(file.value.files[0]);
+  }
+};
 
 const handleAdd = () => {
-  // Create a new contact object
-  const newContact = {
-    name: name.value,
-    relation: relation.value,
-    email: email.value,
-    img_src: '' // Keep the image URL empty for now
-  };
+  // Update newContact with the latest values
+  newContact.name = name.value;
+  newContact.relation = relation.value;
+  newContact.email = email.value;
 
   // Add the new contact to the contacts array at the specific index
   if (props.index !== undefined) {
@@ -52,6 +93,7 @@ const handleAdd = () => {
 };
 </script>
 
+
 <template>
   <button @click="isModalOpen = true" type="button" class="absolute inset-y-4 left-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center me-2">
     <AddContactButton/>
@@ -69,6 +111,16 @@ const handleAdd = () => {
           <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
             <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue"></div>
           </div>
+          <!-- image stuff -->
+          <div class="md:w-1/3">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
+              Image
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file">
+          </div>
+          <!-- end image stuff -->
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Name
