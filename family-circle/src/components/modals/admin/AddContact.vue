@@ -1,12 +1,55 @@
 <script setup>
 import AddContactButton from "../../buttons/admin/AddContact.vue";
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
-const isModalOpen = ref(false)
-const modal = ref(null)
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true
+  }
+});
+
+const emit = defineEmits(['added']);
+
+const isModalOpen = ref(false);
+const modal = ref(null);
 
 onClickOutside(modal, () => (isModalOpen.value = false));
+
+// Inject the contacts array from the parent component
+const contacts = inject('contacts');
+
+// Refs for form inputs
+const name = ref('');
+const relation = ref('');
+const email = ref('');
+
+const handleAdd = () => {
+  // Create a new contact object
+  const newContact = {
+    name: name.value,
+    relation: relation.value,
+    email: email.value,
+    img_src: '' // Keep the image URL empty for now
+  };
+
+  // Add the new contact to the contacts array at the specific index
+  if (props.index !== undefined) {
+    contacts[props.index] = newContact;
+  }
+
+  // Convert the reactive contacts array to a normal array before storing in localStorage
+  const normalContacts = contacts ? JSON.parse(JSON.stringify(contacts)) : [];
+
+  // Update localStorage
+  localStorage.setItem('contacts', JSON.stringify(normalContacts));
+
+  isModalOpen.value = false;
+
+  // Emit the 'added' event
+  emit('added');
+};
 </script>
 
 <template>
@@ -22,7 +65,7 @@ onClickOutside(modal, () => (isModalOpen.value = false));
           </svg>
         </button>
         <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
-        <form class="p-2 ">
+        <form @submit.prevent="handleAdd" class="p-2 ">
           <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
             <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue"></div>
           </div>
@@ -32,31 +75,23 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
+            <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
           </div>
-          <!-- <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Last Name
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="last_name" type="text">
-          </div> -->
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Relation
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
+            <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Phone
+              Email
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
+            <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
             <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
