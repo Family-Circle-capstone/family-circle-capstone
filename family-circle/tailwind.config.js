@@ -35,10 +35,6 @@ export default {
       'darkgrey': '#969696',
       'purple': '#9748ff',
     },
-    fontFamily: {
-      sans: ['Inter', 'sans-serif'],
-      serif: ['Roboto Serif', 'serif'],
-    },
   },
   plugins: [],
 }
