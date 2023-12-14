@@ -107,21 +107,18 @@ const handleAdd = () => {
           </svg>
         </button>
         <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
         <form @submit.prevent="handleAdd" class="p-2 ">
-          <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
-            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue"></div>
+          <div class="w-[150px] h-[150px] mx-auto rounded-[50px]" >
+            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue" @click="handleCircleClick" ref="circle"></div>
           </div>
           <!-- image stuff -->
-          <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Image
-            </label>
-          </div>
           <div class="md:w-2/3">
-            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file">
+            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file" style="display: none;">
           </div>
           <!-- end image stuff -->
           <div class="md:w-1/3">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Name
             </label>
@@ -131,6 +128,7 @@ const handleAdd = () => {
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Relation
             </label>
           </div>
@@ -139,6 +137,7 @@ const handleAdd = () => {
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Email
             </label>
           </div>
@@ -146,6 +145,7 @@ const handleAdd = () => {
             <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
             <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
               Add Contact
             </button>
