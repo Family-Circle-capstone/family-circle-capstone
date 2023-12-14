@@ -29,7 +29,7 @@ const updateKey = () => {
     </div>
     <!-- grid container -->
     <div class="grid grid-cols-2 gap-8 pb-8">
-      <component v-for="(contact, index) in contacts" :is="getComponentType(contact)" :key="index" :index="index" :contact="contact" @deleted="updateKey" @added="updateKey" @edited="updateKey" />
+      <component v-for="(contact, index) in contacts" :is="getComponentType(contact)" :key="`${index}-${key}`" :index="index" :contact="contact" @deleted="updateKey" @added="updateKey" @edited="updateKey" />
     </div>
     <!-- admin buttons container -->
     <div class="grid grid-rows-3 gap-4 pt-8">

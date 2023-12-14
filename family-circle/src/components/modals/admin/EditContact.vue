@@ -26,14 +26,6 @@ const relation = ref('');
 const email = ref('');
 const file = ref(null);
 
-// Create a new contact object
-let newContact = {
-  name: name.value,
-  relation: relation.value,
-  email: email.value,
-  img_src: '' // Keep the image URL empty for now
-};
-
 // Ref for the circle div
 const circle = ref(null);
 
@@ -42,6 +34,13 @@ const handleCircleClick = () => {
   // Trigger the file input click event
   file.value.click();
 };
+// Create a new contact object
+let newContact = ref({
+  name: '',
+  relation: '',
+  email: '',
+  img_src: '' // Keep the image URL empty for now
+});
 
 // Handle file input change
 const handleFileChange = () => {
@@ -89,7 +88,7 @@ const handleFileChange = () => {
         }
 
         // Add the compressed image to the new contact
-        newContact.img_src = dataUrl;
+        newContact.value.img_src = dataUrl;
 
         // Set the background image of the circle div
         circle.value.style.backgroundImage = `url(${dataUrl})`;
@@ -100,16 +99,15 @@ const handleFileChange = () => {
   }
 };
 
-
 const handleEdit = () => {
   // Update newContact with the latest values
-  newContact.name = name.value;
-  newContact.relation = relation.value;
-  newContact.email = email.value;
+  newContact.value.name = name.value;
+  newContact.value.relation = relation.value;
+  newContact.value.email = email.value;
 
   // Add the new contact to the contacts array at the specific index
   if (props.index !== undefined) {
-    contacts[props.index] = newContact;
+    contacts[props.index] = newContact.value;
   }
 
   // Convert the reactive contacts array to a normal array before storing in localStorage
@@ -124,6 +122,7 @@ const handleEdit = () => {
   emit('edited');
 };
 </script>
+
 
 <template>
   <button @click="isModalOpen = true" type="button" class="absolute top-6 right-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
@@ -153,7 +152,7 @@ const handleEdit = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
+            <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
@@ -161,15 +160,15 @@ const handleEdit = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
+            <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Phone
+              Email
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
+            <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
             <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">

@@ -1,16 +1,24 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import DeleteContactModal from "../../modals/admin/DeleteContact.vue";
 import EditContactModal from "../../modals/admin/EditContact.vue";
 
-const props = defineProps(['index']);
-const contact = ref({}); // Declare contact as a reactive property
+const props = defineProps(['index', 'contact']);
+const contact = ref(props.contact);
 
-onMounted(() => {
-  let contacts = JSON.parse(localStorage.getItem('contacts'));
-  contact.value = contacts[props.index];
-})
+// Watch for changes in the contact prop and update the local ref
+watch(() => props.contact, (newContact) => {
+  contact.value = newContact;
+});
+
+// Fetch the contact data when the component is mounted
+onMounted(fetchContact);
+
+function fetchContact() {
+  console.log(contact.value); // This should reflect the changes in the contact prop
+}
 </script>
+
 
 <template>
   <div class="admin-contact-card">
