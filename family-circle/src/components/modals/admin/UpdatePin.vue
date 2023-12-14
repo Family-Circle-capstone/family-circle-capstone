@@ -14,6 +14,9 @@ const confirmPin = ref('')
 const checkPinAndUpdate = () => {
   const storedPin = window.localStorage.getItem('pin');
 
+  console.log('Old PIN:', oldPin.value);
+  console.log('Stored PIN:', storedPin);
+
   if (oldPin.value === storedPin) {
     if (newPin.value === confirmPin.value) {
       // Update the PIN immediately

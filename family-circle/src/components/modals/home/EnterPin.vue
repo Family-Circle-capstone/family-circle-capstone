@@ -16,6 +16,9 @@ watchEffect(() => {
 });
 
 const checkPinAndNavigate = () => {
+  console.log('Entered PIN:', enteredPin.value);
+  console.log('Correct PIN:', correctPin.value);
+
   if (enteredPin.value === correctPin.value) {
     console.log('Navigating to /admin');
     router.push('/admin');
