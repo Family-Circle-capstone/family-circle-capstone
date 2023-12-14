@@ -44,8 +44,8 @@ onClickOutside(modal, () => (isModalOpen.value = false));
   <Teleport to="#modal">
     <div class="modal-bg" v-if="isModalOpen">
       <div class="modal text-black">
-        <button @click="isModalOpen = false" class="close-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-darkgrey">
+        <button @click="isModalOpen = false" class="p-2 close-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#969696" class="w-6 h-6 fill-darkgrey">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
