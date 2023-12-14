@@ -1,19 +1,38 @@
 <script setup>
 import DeleteContactButton from "../../buttons/admin/DeleteContact.vue";
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
-const isModalOpen = ref(false)
-const modal = ref(null)
-let storedContacts = ref([]);
-let name = ref('');
+const props = defineProps(['contact']);
+const emit = defineEmits(['deleted']);
 
+const isModalOpen = ref(false);
+const modal = ref(null);
 
 onClickOutside(modal, () => (isModalOpen.value = false));
+
+// Inject the contacts array from the parent component
+const contacts = inject('contacts');
+
+const handleDelete = () => {
+  if (props.contact && props.contact.name) {
+    const index = contacts.findIndex(contact => contact.name === props.contact.name);
+    if (index !== -1) {
+      contacts[index] = {};
+    }
+  }
+
+  localStorage.setItem('contacts', JSON.stringify(contacts));
+
+  isModalOpen.value = false;
+
+  // Emit the 'deleted' event
+  emit('deleted');
+};
 </script>
 
 <template>
-  <button @click="isModalOpen = true" type="button" class="absolute bottom-6 right-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+  <button @click="isModalOpen = true" type="button" class="absolute bottom-6 right-2 text-white bg-lightblue hover.bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
     <DeleteContactButton/>
   </button>
   <Teleport to="#modal">
@@ -25,13 +44,12 @@ onClickOutside(modal, () => (isModalOpen.value = false));
           </svg>
         </button>
         <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Delete Contact</div>
-        <div>
+        <div v-if="props.contact && props.contact.name">
           <p>Are you sure you want to delete </p>
-          <p class="text-darkblue">{{ contact }}</p>
-          <p>?</p>
+          <p><span class="text-darkblue font-bold">{{ props.contact.name }}</span>?</p>
         </div>
         <div class="p-6 flex items-center justify-between">
-          <button class="mx-auto bg-lightred hover:bg-darkred text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
+          <button @click="handleDelete" class="mx-auto bg-lightred hover:bg-darkred text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
             Delete
           </button>
         </div>
