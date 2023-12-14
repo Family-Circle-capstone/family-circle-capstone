@@ -1,24 +1,15 @@
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import DeleteContactModal from "../../modals/admin/DeleteContact.vue";
 import EditContactModal from "../../modals/admin/EditContact.vue";
 
-export default {
-  components: {EditContactModal, DeleteContactModal},
-  props: ['index'],
-  setup(props) {
-    const contact = ref({}); // Declare contact as a reactive property
+const props = defineProps(['index']);
+const contact = ref({}); // Declare contact as a reactive property
 
-    onMounted(() => {
-      let contacts = JSON.parse(localStorage.getItem('contacts'));
-      contact.value = contacts[props.index];
-    })
-
-    return {
-      contact
-    };
-  }
-}
+onMounted(() => {
+  let contacts = JSON.parse(localStorage.getItem('contacts'));
+  contact.value = contacts[props.index];
+})
 </script>
 
 <template>
@@ -27,7 +18,7 @@ export default {
       <!-- contact buttons -->
       <div class="">
         <!-- edit button -->
-        <EditContactModal/>
+        <EditContactModal :index="index"/>
         <!-- delete button -->
         <DeleteContactModal :contact="contact" />
       </div>
