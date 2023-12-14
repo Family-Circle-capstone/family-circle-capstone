@@ -17,22 +17,13 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -68,19 +59,13 @@ The above image shows the video call interface while a call is in progress.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-### Prerequisites
-
-### Installation
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- USAGE EXAMPLES -->
 ## Voice Commands
 On the home screen, use the words "circle call + <name>" to start a new call. For example, if John Smith is one of the defined contacts, say "Circle call John" or "Circle call John Smith". You can even say "Circle call Mr. Smith" to get connected.
 
 Names, however, are unique. There are limitations with unique spellings of names, or uncommon names. They are likely to be misinterpreted by the speech recognition library.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -98,7 +83,10 @@ Names, however, are unique. There are limitations with unique spellings of names
       - [ ] - Integrate Admin Operations
       - [x] - Integrate Voice Commands
 - [ ] Sprint 3 - December 11 - December 15
-    - [ ] - Connecting loose ends
+    - [ ] - Continue Building Web App
+      - [ ] - Integrate Admin Operations
+      - [ ] - Implement Local Storage
+      - [x] - Build Demo Day Slide Deck
 - [ ] Sprint 4 - December 16 - December 21
     - [ ] - Project Retrospective
     - [ ] - Celebrate :tada:
