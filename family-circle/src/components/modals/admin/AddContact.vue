@@ -34,6 +34,15 @@ let newContact = {
   img_src: '' // Keep the image URL empty for now
 };
 
+// Ref for the circle div
+const circle = ref(null);
+
+// Handle circle click
+const handleCircleClick = () => {
+  // Trigger the file input click event
+  file.value.click();
+};
+
 // Handle file input change
 const handleFileChange = () => {
   if (file.value.files[0]) {
@@ -47,8 +56,27 @@ const handleFileChange = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
+        // Set the canvas dimensions to match the circle
+        canvas.width = 150;
+        canvas.height = 150;
+
+        // Calculate the dimensions for the image
+        let width = img.width;
+        let height = img.height;
+        if (height > width) {
+          height = height * (150 / width);
+          width = 150;
+        } else {
+          width = width * (150 / height);
+          height = 150;
+        }
+
+        // Calculate the position for the image
+        let x = (150 - width) / 2;
+        let y = (150 - height) / 2;
+
         // Draw the image onto the canvas
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, x, y, width, height);
 
         // Get a compressed version of the image
         let quality = 0.8;
@@ -62,12 +90,16 @@ const handleFileChange = () => {
 
         // Add the compressed image to the new contact
         newContact.img_src = dataUrl;
+
+        // Set the background image of the circle div
+        circle.value.style.backgroundImage = `url(${dataUrl})`;
       };
     };
 
     reader.readAsDataURL(file.value.files[0]);
   }
 };
+
 
 const handleAdd = () => {
   // Update newContact with the latest values
@@ -93,7 +125,6 @@ const handleAdd = () => {
 };
 </script>
 
-
 <template>
   <button @click="isModalOpen = true" type="button" class="absolute inset-y-4 left-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-lg p-2.5 text-center inline-flex items-center me-2">
     <AddContactButton/>
@@ -108,17 +139,12 @@ const handleAdd = () => {
         </button>
         <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
         <form @submit.prevent="handleAdd" class="p-2 ">
-          <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
-            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue"></div>
+          <div class="w-[150px] h-[150px] mx-auto rounded-[50px]" >
+            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue" @click="handleCircleClick" ref="circle"></div>
           </div>
           <!-- image stuff -->
-          <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Image
-            </label>
-          </div>
           <div class="md:w-2/3">
-            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file">
+            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file" style="display: none;">
           </div>
           <!-- end image stuff -->
           <div class="md:w-1/3">
