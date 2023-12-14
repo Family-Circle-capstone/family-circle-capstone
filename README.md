@@ -28,6 +28,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+You can visit our website [here](http://www.familycircle.site) (Until we stop paying for hosting anyway)
+
 Family Circle is a simple and accessible web app designed to make out-going calls to preset contacts. The intended market for this application are individuals who may not be comfortable using other video call services and find themselves in an isolated environment.
 
 By clicking on a face / name of someone they know, a video call will begin, and the recipient will be notified to join. There is also voice command functionality to start a call for those with mobility restrictions.
