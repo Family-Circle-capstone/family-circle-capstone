@@ -2,10 +2,10 @@
 import { reactive, provide } from 'vue';
 
 let contacts = [
-  { name: 'Ben Sbanotto', relation: 'grandson', email: 'alixvox@gmail.com', img_src: new URL('./assets/profiles/ben.jpg', import.meta.url).href},
-  {},
-  { name: 'Alex Leeper', relation: 'nephew', email: 'alixvox@gmail.com', img_src: new URL('./assets/profiles/alex.jpg', import.meta.url).href},
-  {}
+  { name: 'Ben Sbanotto', relation: 'grandson', email: '4905@holbertonstudents.com', img_src: new URL('./assets/profiles/ben.jpg', import.meta.url).href},
+  { name: 'Baylee Bowen', relation: 'daughter', email: '4217@holbertonstudents.com', img_src: new URL('./assets/profiles/baylee.jpg', import.meta.url).href},
+  { name: 'Alex Leeper', relation: 'nephew', email: '3628@holbertonstudents.com', img_src: new URL('./assets/profiles/alex.jpg', import.meta.url).href},
+  { name: 'Matthew Allen', relation: 'son', email: '4928@holbertonschool.com', img_src: new URL('./assets/profiles/matthew.jpg', import.meta.url).href},
 ]
 
 // Ensure that contacts array always has four elements
