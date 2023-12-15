@@ -32,7 +32,7 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <button @click="isModalOpen = true" type="button" class="absolute bottom-6 right-2 text-white bg-lightblue hover.bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+  <button @click="isModalOpen = true" type="button" class="absolute bottom-6 right-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
     <DeleteContactButton/>
   </button>
   <Teleport to="#modal">

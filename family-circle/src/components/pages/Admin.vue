@@ -2,9 +2,11 @@
 import { ref, watchEffect, inject } from 'vue';
 import SaveButton from '../buttons/admin/Save.vue'
 import CancelButton from '../buttons/admin/Cancel.vue'
+import BackButton from '../buttons/admin/Back.vue'
 import ContactCard from "../contacts/admin/ContactCard.vue";
 import AddContactCard from "../contacts/admin/AddContactCard.vue";
 import UpdatePinModal from "../modals/admin/UpdatePin.vue";
+import Back from "../buttons/admin/Back.vue";
 
 // Inject the contacts array from the parent component
 const contacts = inject('contacts');
@@ -23,12 +25,6 @@ const updateKey = () => {
 <template>
   <!-- page container -->
   <div class="mx-auto">
-    <!-- back button -->
-    <router-link to="/">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#969696" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-      </svg>
-    </router-link>
     <!-- logo -->
     <div>
       <img src="../../assets/admin/logo.svg" alt="logo" class="mx-auto pb-8 w-[252.50px] h-[123px]">
@@ -43,6 +39,8 @@ const updateKey = () => {
         <!-- save button -->
         <!-- update pin button -->
         <UpdatePinModal/>
+        <!-- back button -->
+        <BackButton/>
         <!-- cancel button -->
       </div>
     </div>
