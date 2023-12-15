@@ -149,7 +149,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="mx-auto">
+  <div class="mx-auto border-4 border-black p-8">
     <!-- Video Text -->
     <div class="pb-8 text-[40px] font-normal font-['Roboto-Serif']">
           <span class="text-black">
@@ -164,14 +164,14 @@ onUnmounted(() => {
           </span>
       <span class="text-black">.</span>
     </div>
-    <div class="mx-auto">
-      <div class="grid grid-cols-2">
+    <div class="mx-auto place-items-center">
+      <div class="grid grid-cols-[repeat(auto-fit,50%)]">
         <!-- Remote Video Screen -->
-        <div ref="remoteVideoRef" class="mx-auto h-[600px] w-[445px] bg-lightgrey border border-black">
+        <div ref="remoteVideoRef" class="h-[600px] w-[445px] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
         </div>
-        <!-- Local Video Screen -->
-        <div class="inset-0 pt-20 mx-auto">
+        <div class="p-20 mx-auto">
+          <!-- Local Video Screen -->
           <div ref="localVideoRef" class="w-[200px] h-[150px] bg-lightgrey border border-black">
             <!-- local video will be attached here -->
           </div>
