@@ -165,20 +165,21 @@ onUnmounted(() => {
       <span class="text-black">.</span>
     </div>
     <div class="mx-auto">
-      <div>
+      <div class="grid grid-cols-2 gap-6">
         <!-- Remote Video Screen -->
         <div ref="remoteVideoRef" class="mx-auto h-[600px] w-[445px] bg-lightgrey border border-black">
           <!-- remote video will be attached here -->
-          <div class="absolute h-[605px] w-[445px]">
-            <!-- Local Video Screen -->
-            <div ref="localVideoRef" class="absolute bottom-5 left-4 w-[200px] h-[150px] bg-lightgrey border border-black">
-              <!-- local video will be attached here -->
-            </div>
-            <!-- End Call Button -->
-            <button class="absolute bottom-5 right-5">
-              <EndCallButton @endCall="leaveRoom" />
-            </button>
+        </div>
+        <!-- Local Video Screen -->
+        <div class="p-20 mx-auto">
+          <div ref="localVideoRef" class="w-[200px] h-[150px] bg-lightgrey border border-black">
+            <!-- local video will be attached here -->
           </div>
+          <div class="p-16"><!--grid spacing--></div>
+          <!-- End Call Button -->
+          <button class="">
+            <EndCallButton @endCall="leaveRoom" />
+          </button>
         </div>
       </div>
     </div>
