@@ -101,6 +101,7 @@ function handleConnectedParticipant(participant) {
 function displayTrack(track, participant) {
   console.log(`Attempting to display ${track.kind} track for ${participant.identity}:`);
   const element = track.attach();
+  element.classList.add('video-fullscreen'); // Add this line
   console.log(`${track.kind} element for ${participant.identity}:`, element);
   if (track.kind === "video") {
 
@@ -185,3 +186,12 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.video-fullscreen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+</style>
