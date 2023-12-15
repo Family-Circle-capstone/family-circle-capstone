@@ -26,7 +26,7 @@ function fetchContact() {
       <!-- contact buttons -->
       <div class="">
         <!-- edit button -->
-        <EditContactModal :index="index"/>
+        <EditContactModal :index="index" :contact="contact"/>
         <!-- delete button -->
         <DeleteContactModal :contact="contact" />
       </div>

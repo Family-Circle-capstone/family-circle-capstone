@@ -1,48 +1,66 @@
 <script setup>
 import EditContactButton from "../../buttons/admin/EditContact.vue";
-import { ref, inject } from 'vue';
+import { ref, inject, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  contact: {
+    type: Object,
+    required: true
   }
 });
 
 const emit = defineEmits(['edited']);
 
-const isModalOpen = ref(false)
-const modal = ref(null)
+const isModalOpen = ref(false);
+const modal = ref(null);
 
 onClickOutside(modal, () => (isModalOpen.value = false));
 
-// Inject the contacts array from the parent component
 const contacts = inject('contacts');
 
-// Refs for form inputs
-const name = ref('');
-const relation = ref('');
-const email = ref('');
+const name = ref(props.contact.name);
+const relation = ref(props.contact.relation);
+const email = ref(props.contact.email);
+const img_src = ref(props.contact.img_src);
 const file = ref(null);
-
-// Ref for the circle div
 const circle = ref(null);
 
-// Handle circle click
-const handleCircleClick = () => {
-  // Trigger the file input click event
-  file.value.click();
+
+const updateCircleBackground = () => {
+  circle.value.style.backgroundImage = `url(${img_src.value})`;
 };
-// Create a new contact object
-let newContact = ref({
-  name: '',
-  relation: '',
-  email: '',
-  img_src: '' // Keep the image URL empty for now
+
+watch(() => isModalOpen, (newValue) => {
+  if (newValue && img_src.value) {
+    setTimeout(updateCircleBackground, 0);
+  }
 });
 
-// Handle file input change
+
+watch(() => props.contact, (newContact) => {
+  name.value = newContact.name;
+  relation.value = newContact.relation;
+  email.value = newContact.email;
+  img_src.value = newContact.img_src;
+});
+
+const handleCircleClick = () => {
+  file.value.click();
+  circle.value.style.backgroundImage = `url(${img_src.value})`;
+};
+
+let newContact = ref({
+  name: name.value,
+  relation: relation.value,
+  email: email.value,
+  img_src: img_src.value
+});
+
 const handleFileChange = () => {
   if (file.value.files[0]) {
     const reader = new FileReader();
@@ -55,11 +73,9 @@ const handleFileChange = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Set the canvas dimensions to match the circle
         canvas.width = 150;
         canvas.height = 150;
 
-        // Calculate the dimensions for the image
         let width = img.width;
         let height = img.height;
         if (height > width) {
@@ -70,27 +86,20 @@ const handleFileChange = () => {
           height = 150;
         }
 
-        // Calculate the position for the image
         let x = (150 - width) / 2;
         let y = (150 - height) / 2;
 
-        // Draw the image onto the canvas
         ctx.drawImage(img, x, y, width, height);
 
-        // Get a compressed version of the image
         let quality = 0.8;
         let dataUrl = canvas.toDataURL('image/jpeg', quality);
 
-        // Check the size of the dataUrl string
         while (dataUrl.length / 1024 > 1024 && quality > 0) {
           quality -= 0.1;
           dataUrl = canvas.toDataURL('image/jpeg', quality);
         }
 
-        // Add the compressed image to the new contact
-        newContact.value.img_src = dataUrl;
-
-        // Set the background image of the circle div
+        img_src.value = dataUrl;
         circle.value.style.backgroundImage = `url(${dataUrl})`;
       };
     };
@@ -100,28 +109,27 @@ const handleFileChange = () => {
 };
 
 const handleEdit = () => {
-  // Update newContact with the latest values
   newContact.value.name = name.value;
   newContact.value.relation = relation.value;
   newContact.value.email = email.value;
+  newContact.value.img_src = img_src.value;
 
-  // Add the new contact to the contacts array at the specific index
   if (props.index !== undefined) {
     contacts[props.index] = newContact.value;
   }
 
-  // Convert the reactive contacts array to a normal array before storing in localStorage
   const normalContacts = contacts ? JSON.parse(JSON.stringify(contacts)) : [];
 
-  // Update localStorage
   localStorage.setItem('contacts', JSON.stringify(normalContacts));
 
   isModalOpen.value = false;
 
-  // Emit the 'added' event
+  img_src.value = '';
+
   emit('edited');
 };
 </script>
+
 
 
 <template>
