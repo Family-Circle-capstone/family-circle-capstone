@@ -19,6 +19,6 @@ const props = defineProps({
           <AddContactModal :index="index"/>
         </div>
         <!-- add text -->
-        <div class="w-[169px] h-[41px] left-[133px] top-[55px] pt-1 text-left absolute text-darkblue text-[25px] font-normal font-['Roboto-Serif']">Add Contact</div>
+        <div class="w-[169px] h-[41px] left-[133px] top-[55px] pt-1 text-left absolute text-darkblue text-[25px] font-normal font-['Arial']">Add Contact</div>
       </div>
 </template>

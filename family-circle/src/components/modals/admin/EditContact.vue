@@ -1,13 +1,136 @@
 <script setup>
 import EditContactButton from "../../buttons/admin/EditContact.vue";
-import { ref } from 'vue';
+import { ref, inject, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
-const isModalOpen = ref(false)
-const modal = ref(null)
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true
+  },
+  contact: {
+    type: Object,
+    required: true
+  }
+});
+
+const emit = defineEmits(['edited']);
+
+const isModalOpen = ref(false);
+const modal = ref(null);
 
 onClickOutside(modal, () => (isModalOpen.value = false));
+
+const contacts = inject('contacts');
+
+const name = ref(props.contact.name);
+const relation = ref(props.contact.relation);
+const email = ref(props.contact.email);
+const img_src = ref(props.contact.img_src);
+const file = ref(null);
+const circle = ref(null);
+
+
+const updateCircleBackground = () => {
+  circle.value.style.backgroundImage = `url(${img_src.value})`;
+};
+
+watch(() => isModalOpen, (newValue) => {
+  if (newValue && img_src.value) {
+    setTimeout(updateCircleBackground, 0);
+  }
+});
+
+
+watch(() => props.contact, (newContact) => {
+  name.value = newContact.name;
+  relation.value = newContact.relation;
+  email.value = newContact.email;
+  img_src.value = newContact.img_src;
+});
+
+const handleCircleClick = () => {
+  file.value.click();
+  circle.value.style.backgroundImage = `url(${img_src.value})`;
+};
+
+let newContact = ref({
+  name: name.value,
+  relation: relation.value,
+  email: email.value,
+  img_src: img_src.value
+});
+
+const handleFileChange = () => {
+  if (file.value.files[0]) {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const img = new Image();
+      img.src = reader.result;
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 150;
+        canvas.height = 150;
+
+        let width = img.width;
+        let height = img.height;
+        if (height > width) {
+          height = height * (150 / width);
+          width = 150;
+        } else {
+          width = width * (150 / height);
+          height = 150;
+        }
+
+        let x = (150 - width) / 2;
+        let y = (150 - height) / 2;
+
+        ctx.drawImage(img, x, y, width, height);
+
+        let quality = 0.8;
+        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+        while (dataUrl.length / 1024 > 1024 && quality > 0) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        img_src.value = dataUrl;
+        circle.value.style.backgroundImage = `url(${dataUrl})`;
+      };
+    };
+
+    reader.readAsDataURL(file.value.files[0]);
+  }
+};
+
+const handleEdit = () => {
+  newContact.value.name = name.value;
+  newContact.value.relation = relation.value;
+  newContact.value.email = email.value;
+  newContact.value.img_src = img_src.value;
+
+  if (props.index !== undefined) {
+    contacts[props.index] = newContact.value;
+  }
+
+  const normalContacts = contacts ? JSON.parse(JSON.stringify(contacts)) : [];
+
+  localStorage.setItem('contacts', JSON.stringify(normalContacts));
+
+  isModalOpen.value = false;
+
+  img_src.value = '';
+
+  emit('edited');
+};
 </script>
+
+
 
 <template>
   <button @click="isModalOpen = true" type="button" class="absolute top-6 right-2 text-white bg-lightblue hover:bg-darkblue font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
@@ -21,49 +144,42 @@ onClickOutside(modal, () => (isModalOpen.value = false));
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-4 text-3xl text-center text-darkblue font-['Roboto-Serif']">Edit Contact</div>
-        <form class="p-2">
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Edit Contact</div>
+        <form @submit.prevent="handleEdit" class="p-2 ">
           <div class="w-[150px] h-[150px] mx-auto rounded-[50px]">
-            <button class="w-[150px] h-[150px] bg-white rounded-[75px] border-4 border-lightblue" @click="handleCircleClick" ref="circle">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3949ab" class="mx-auto h-20 w-20">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-              </svg>
-            </button>
+            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue" @click="handleCircleClick" ref="circle"></div>
           </div>
-          <div class="pt-4 md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4 font-san">
+          <!-- image stuff -->
+          <div class="md:w-2/3">
+            <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file" style="display: none;">
+          </div>
+          <!-- end image stuff -->
+          <div class="md:w-1/3">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Name
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-8 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
+            <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
           </div>
-          <!-- <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
-              Last Name
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="last_name" type="text">
-          </div> -->
           <div class="md:w-1/3">
-            <label class="block text-darkblue font-san md:text-right mb-1 md:mb-0 pr-4">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Relation
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
+            <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
           </div>
           <div class="md:w-1/3">
-            <label class="block text-darkblue font-san md:text-right mb-1 md:mb-0 pr-4">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Email
             </label>
           </div>
           <div class="md:w-2/3">
-            <input class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="email" type="text">
+            <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-san py-2 px-4 rounded" type="submit">
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
               Save Changes
             </button>
           </div>

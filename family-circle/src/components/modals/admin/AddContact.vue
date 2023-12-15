@@ -137,22 +137,18 @@ const handleAdd = () => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-4 text-3xl text-center text-darkblue font-['Roboto-Serif']">Add New Contact</div>
+        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
         <form @submit.prevent="handleAdd" class="p-2 ">
           <div class="w-[150px] h-[150px] mx-auto rounded-[50px]" >
-            <button class="w-[150px] h-[150px] bg-white rounded-[75px] border-4 border-lightblue" @click="handleCircleClick" ref="circle">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3949ab" class="mx-auto h-20 w-20">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-              </svg>
-            </button>
+            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue" @click="handleCircleClick" ref="circle"></div>
           </div>
           <!-- image stuff -->
-          <div class="md:w-2/3 p-2">
+          <div class="md:w-2/3">
             <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file" style="display: none;">
           </div>
           <!-- end image stuff -->
           <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4 font-san">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Name
             </label>
           </div>
@@ -160,7 +156,7 @@ const handleAdd = () => {
             <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
           </div>
           <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4 font-san">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Relation
             </label>
           </div>
@@ -168,7 +164,7 @@ const handleAdd = () => {
             <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
           </div>
           <div class="md:w-1/3">
-            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4 font-san">
+            <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
               Email
             </label>
           </div>
@@ -176,7 +172,7 @@ const handleAdd = () => {
             <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-san py-2 px-4 rounded" type="submit">
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
               Add Contact
             </button>
           </div>
