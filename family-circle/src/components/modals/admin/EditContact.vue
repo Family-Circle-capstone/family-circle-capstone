@@ -161,7 +161,7 @@ const handleEdit = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text">
+            <input v-model="name" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" maxlength="14">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
@@ -169,7 +169,7 @@ const handleEdit = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text">
+            <input v-model="relation" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="relation" type="text" maxlength="14">
           </div>
           <div class="md:w-1/3">
             <label class="block text-darkblue md:text-right mb-1 md:mb-0 pr-4">
