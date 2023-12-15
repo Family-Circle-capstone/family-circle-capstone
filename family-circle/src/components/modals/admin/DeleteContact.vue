@@ -43,13 +43,13 @@ const handleDelete = () => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Delete Contact</div>
-        <div v-if="props.contact && props.contact.name">
+        <div class="p-4 text-3xl text-center text-darkblue font-['Roboto-Serif']">Delete Contact</div>
+        <div v-if="props.contact && props.contact.name" class="text-center">
           <p>Are you sure you want to delete </p>
           <p><span class="text-darkblue font-bold">{{ props.contact.name }}</span>?</p>
         </div>
         <div class="p-6 flex items-center justify-between">
-          <button @click="handleDelete" class="mx-auto bg-lightred hover:bg-darkred text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
+          <button @click="handleDelete" class="mx-auto bg-lightred hover:bg-darkred text-white font-bold font-sans py-2 px-4 rounded" type="submit">
             Delete
           </button>
         </div>

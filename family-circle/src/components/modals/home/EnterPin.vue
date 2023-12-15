@@ -41,12 +41,12 @@ const checkPinAndNavigate = () => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Administrator PIN</div>
+        <div class="p-4 text-3xl text-center text-darkblue font-['Roboto-Serif']">Administrator PIN</div>
         <form class="p-2">
           <!-- Bind the enteredPin ref to the input field -->
           <input v-model="enteredPin" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="pin" type="password" pattern="[0-9]{4}" maxlength="4">
-          <div class="p-2 flex items-center justify-between">
-            <button @click="checkPinAndNavigate" class="bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="button">
+          <div class="pt-8 flex items-center justify-between">
+            <button @click="checkPinAndNavigate" class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-sans py-2 px-4 rounded" type="button">
               Sign In
             </button>
           </div>

@@ -137,13 +137,17 @@ const handleAdd = () => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <div class="p-2 text-3xl text-center text-darkblue font-['Arial']">Add New Contact</div>
+        <div class="p-4 text-3xl text-center text-darkblue font-['Roboto-Serif']">Add New Contact</div>
         <form @submit.prevent="handleAdd" class="p-2 ">
           <div class="w-[150px] h-[150px] mx-auto rounded-[50px]" >
-            <div class="w-[150px] h-[150px] bg-white rounded-[75px] border-2 border-lightblue" @click="handleCircleClick" ref="circle"></div>
+            <div class="h-[150px] bg-white rounded-[75px] border-8 border-lightblue hover:border-darkblue" @click="handleCircleClick" ref="circle">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3949ab" class="hover:stroke-darkblue">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </div>
           </div>
           <!-- image stuff -->
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 p-2">
             <input @change="handleFileChange" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" accept="image/*" ref="file" style="display: none;">
           </div>
           <!-- end image stuff -->
@@ -172,7 +176,7 @@ const handleAdd = () => {
             <input v-model="email" class="bg-white appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text">
           </div>
           <div class="p-6 flex items-center justify-between">
-            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-['Arial'] py-2 px-4 rounded" type="submit">
+            <button class="mx-auto bg-lightblue hover:bg-darkblue text-white font-bold font-sans py-2 px-4 rounded" type="submit">
               Add Contact
             </button>
           </div>
