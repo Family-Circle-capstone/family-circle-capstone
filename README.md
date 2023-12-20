@@ -79,19 +79,19 @@ Names, however, are unique. There are limitations with unique spellings of names
     - [x] - Mock up of App design
     - [x] - Determine Tech stack
 - [x] Sprint 2 - December 4 - December 10
-    - [ ] - Build Web App
+    - [x] - Build Web App
       - [x] - Create App Home Screen
       - [x] - Integrate Video Calling Cababilities
-      - [ ] - Integrate Admin Operations
+      - [x] - Integrate Admin Operations
       - [x] - Integrate Voice Commands
-- [ ] Sprint 3 - December 11 - December 15
-    - [ ] - Continue Building Web App
-      - [ ] - Integrate Admin Operations
-      - [ ] - Implement Local Storage
+- [x] Sprint 3 - December 11 - December 15
+    - [x] - Continue Building Web App
+      - [x] - Integrate Admin Operations
+      - [x] - Implement Local Storage
       - [x] - Build Demo Day Slide Deck
 - [ ] Sprint 4 - December 16 - December 21
     - [ ] - Project Retrospective
-    - [ ] - Celebrate :tada:
+    - [x] - Celebrate :tada:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
